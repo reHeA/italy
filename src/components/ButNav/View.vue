@@ -4,10 +4,12 @@ import { onBeforeMount, onMounted, ref, watch, computed } from 'vue';
 interface p {
   dialog: boolean;
   title: string | null;
+  content: any;
 }
 const props = withDefaults(defineProps<p>(), {
   dialog: false,
-  title: ''
+  title: '',
+  content: null
 });
 const $emit = defineEmits(['close']);
 const themeVars = {
@@ -21,21 +23,17 @@ const themeVars = {
   <van-config-provider :theme-vars="themeVars">
     <van-dialog
       v-model:show="dialog"
-      title="一部手机云游意大利"
+      :title="title"
       :show-confirm-button="false"
       :show-cancel-button="false"
       @close="$emit('close')"
       closeOnClickOverlay
-      class="dialog"
     >
-      <!-- {{ title }} -->
+      {{ content }}
     </van-dialog>
   </van-config-provider>
 </template>
 
 
 <style scoped>
-  .dialog .vant-dialog{
-      top: 25%;
-  }
 </style>

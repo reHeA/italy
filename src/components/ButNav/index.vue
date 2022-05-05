@@ -26,7 +26,7 @@ const getView = () => {
 };
 const getDetail = () => {
   dialogShow.value = true;
-  title.value = '123';
+  title.value = '一部手机云游意大利';
 };
 onMounted(() => {
   getView();
