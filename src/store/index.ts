@@ -1,0 +1,11 @@
+import { createStore } from 'vuex';
+import vuexModules from './modules';
+import state from './state';
+import mutations from './mutations';
+import getters from './getters';
+export default createStore({
+  state,
+  mutations,
+  getters,
+  modules: vuexModules
+});
