@@ -1,12 +1,14 @@
 @font-face {
-  font-family: 'iconfont';  /* Project id 3363362 */
-  src: url('//at.alicdn.com/t/font_3363362_vkbfnri5uon.woff2?t=1651203402627') format('woff2'),
-       url('//at.alicdn.com/t/font_3363362_vkbfnri5uon.woff?t=1651203402627') format('woff'),
-       url('//at.alicdn.com/t/font_3363362_vkbfnri5uon.ttf?t=1651203402627') format('truetype');
+  font-family: 'iconfont';
+  /* Project id 3363362 */
+  src: url('//at.alicdn.com/t/font_3363362_suoz240688.woff2?t=1651914306857') format('woff2'),
+    url('//at.alicdn.com/t/font_3363362_suoz240688.woff?t=1651914306857') format('woff'),
+    url('//at.alicdn.com/t/font_3363362_suoz240688.ttf?t=1651914306857') format('truetype');
 }
+
 .iconfont {
   font-family: "iconfont" !important;
-  font-size: 16px;
+  font-size: 20px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -15,18 +17,33 @@
 .icon-dianzan:before {
   content: "\e8ad";
 }
+
 .icon-vedio:before {
   content: "\eca5";
+
 }
+
 .icon-jie:before {
   content: "\e749";
+
 }
+
 .icon-view:before {
   content: "\e63e";
 }
+
 .icon-jianjie:before {
   content: "\e6a2";
 }
+
 .icon-home:before {
   content: "\e601";
+}
+
+.icon-home1:before {
+  content: "\e646";
+}
+
+.icon-menu:before {
+  content: "\e620";
 }

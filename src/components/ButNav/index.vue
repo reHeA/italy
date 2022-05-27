@@ -43,7 +43,7 @@ onMounted(() => {
     <div>
       <div class="iconWraapper" @click="getVedio">
         <i class="iconfont icon-vedio" />
-        <div class="iconTitle">vr宣传片</div>
+        <div class="iconTitle">VR宣传片</div>
       </div>
       <div class="iconWraapper" @click="getJie">
         <i class="iconfont icon-home" />
@@ -86,7 +86,7 @@ onMounted(() => {
   position: fixed;
   bottom: 0;
   z-index: 1;
-  padding: 16px;
+  padding: 8px;
   box-sizing: border-box;
 }
 .iconWraapper {
@@ -96,10 +96,10 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin-right: 16px;
+  margin-right: 8px;
 }
 .iconTitle {
-  font-size: 12px;
+  font-size: 8px;
   margin-top: 8px;
 }
 </style>

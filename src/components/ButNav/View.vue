@@ -1,6 +1,7 @@
 <script lang='ts' setup>
 import { Dialog } from 'vant';
 import { onBeforeMount, onMounted, ref, watch, computed } from 'vue';
+const dialogV = ref<boolean>(false);
 interface p {
   dialog: boolean;
   title: string | null;
@@ -11,6 +12,12 @@ const props = withDefaults(defineProps<p>(), {
   title: '',
   content: null
 });
+watch(
+  () => props.dialog,
+  (newVal, oldVal) => {
+    dialogV.value = newVal;
+  }
+);
 const $emit = defineEmits(['close']);
 const themeVars = {
   dialogWidth: '100%',
@@ -22,7 +29,7 @@ const themeVars = {
 <template>
   <van-config-provider :theme-vars="themeVars">
     <van-dialog
-      v-model:show="dialog"
+      v-model:show="dialogV"
       :title="title"
       :show-confirm-button="false"
       :show-cancel-button="false"
