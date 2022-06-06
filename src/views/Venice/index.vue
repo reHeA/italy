@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div id="panorama" ref="panor"></div>
   <Swipe v-if="show" />
   <ViewNav @getShow="getShow" @cityView="cityView" :upVal="upVal" :giveId="giveId" :src="src" @showVideo="showVideo"/>
@@ -89,25 +89,25 @@ const showVr = () => {
     yaw: -135.4,
     hfov: 120,
     hotSpots: [
-      {
-        pitch: 10.1,
-        yaw: 1.5,
-        type: 'info',
-        text: 'Baltimore Museum of Art',
-        URL: 'https://artbma.org/'
-      },
-      {
-        pitch: -9.4,
-        yaw: 222.6,
-        type: 'info',
-        text: 'Art Museum Drive'
-      },
-      {
-        pitch: -0.9,
-        yaw: 144.4,
-        type: 'info',
-        text: 'North Charles Street'
-      }
+      // {
+      //   pitch: 10.1,
+      //   yaw: 1.5,
+      //   type: 'info',
+      //   text: 'Baltimore Museum of Art',
+      //   URL: 'https://artbma.org/'
+      // },
+      // {
+      //   pitch: -9.4,
+      //   yaw: 222.6,
+      //   type: 'info',
+      //   text: 'Art Museum Drive'
+      // },
+      // {
+      //   pitch: -0.9,
+      //   yaw: 144.4,
+      //   type: 'info',
+      //   text: 'North Charles Street'
+      // }
     ]
     // preview: '/images/tocopilla-preview.jpg'
   });

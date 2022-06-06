@@ -36,15 +36,6 @@ const imgList = ref<any[]>([]);
 const giveId = ref<number>();
 const src = ref<string>();
 const videoShow = ref<boolean>(false);
-// const loadMainJScript = () => {
-//   const script = document.createElement('script');
-//   script.type = 'text/javascript';
-//   script.src = './../js/pannellum.js';
-//   document.body.appendChild(script);
-//   script.onload = () => {
-//     showVr();
-//   };
-// };
 const ScenicParams = reactive({
   city_id: 2
 });
@@ -99,10 +90,11 @@ watch(
 const showVr = () => {
   panor.value = pannellum.viewer('panorama', {
     type: 'equirectangular',
-    panorama: 'http://api.italyvirtualtour.cn/scenic/scenic_images/202205/8ee5cf6f14c0813f2ee5e2ba43ea3407.jpg',
+    panorama: imageCover.value,
     autoLoad: true,
+    autoRotate: -2,
     showControls: false,
-    pitch: 2.3,
+    pitch: 5.3,
     yaw: -135.4,
     hfov: 120,
     hotSpots: [
@@ -110,24 +102,37 @@ const showVr = () => {
         pitch: 10.1,
         yaw: 1.5,
         type: 'info',
-        text: 'Baltimore Museum of Art',
-        URL: 'https://artbma.org/'
-      },
-      {
-        pitch: -9.4,
-        yaw: 222.6,
-        type: 'info',
-        text: 'Art Museum Drive'
-      },
-      {
-        pitch: -0.9,
-        yaw: 144.4,
-        type: 'info',
-        text: 'North Charles Street'
+        cssClass: 'custom-hotspot',
+        createTooltipFunc: hotspot,
+        createTooltipArgs: '花之圣母大教堂'
       }
+      // {
+      //   pitch: -9.4,
+      //   yaw: 222.6,
+      //   type: 'info',
+      //   text: 'Art Museum Drive'
+      // },
+      // {
+      //   pitch: -0.9,
+      //   yaw: 144.4,
+      //   type: 'info',
+      //   text: 'North Charles Street'
+      // }
     ]
     // preview: '/images/tocopilla-preview.jpg'
   });
+};
+const hotspot = (hotSpotDiv: any, args: any) => {
+  hotSpotDiv.classList.add('custom-tooltip');
+  var span = document.createElement('span');
+  span.innerHTML = args;
+  hotSpotDiv.appendChild(span);
+  span.style.fontSize = 12 + 'px';
+  span.style.color = '#fff';
+  span.style.width = span.scrollWidth - 20 + 'px';
+  span.style.padding = 4 + 'px';
+  span.style.background = 'darkgray';
+  span.style.borderRadius = 6 + 'px';
 };
 </script>
 
@@ -135,5 +140,38 @@ const showVr = () => {
 #pannellum {
   width: 600px;
   height: 400px;
+}
+.custom-hotspot {
+  height: 50px;
+  width: 50px;
+  color: #fff;
+}
+div.custom-tooltip span {
+  visibility: hidden;
+  position: absolute;
+  border-radius: 3px;
+  background-color: #fff;
+  color: #fff;
+  text-align: center;
+  max-width: 200px;
+  padding: 5px 10px;
+  margin-left: -220px;
+  cursor: default;
+}
+div.custom-tooltip:hover span {
+  visibility: visible;
+}
+div.custom-tooltip:hover span:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-width: 10px;
+  border-style: solid;
+  border-color: #fff transparent transparent transparent;
+  bottom: -20px;
+  left: -10px;
+  margin: 0 50%;
+  color: #fff;
 }
 </style>
