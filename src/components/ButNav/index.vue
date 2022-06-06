@@ -1,28 +1,39 @@
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
+import Video from '@/components/Video/index.vue';
 import View from './View.vue';
+import { getCountry, Give, getInsert } from '@/api/user';
+
 const dialogShow = ref<boolean>(false);
 const upNum = ref<number>(0);
 const hasUp = ref<boolean>(false);
 const hasView = ref<boolean>(false);
 const viewNum = ref<number>(0);
 const title = ref();
+const show = ref<boolean>(false);
+const src = ref<string>('');
+const content = ref<any>();
+const giveParams = reactive({
+  type: 1,
+  give_id: 1
+});
+const InserParams = reactive({
+  type: 1,
+  browse_id: 1
+});
 const getUp = () => {
-  if (hasUp.value) {
-    return false;
-  } else {
-    upNum.value += 1;
-    localStorage.setItem('upNum', upNum.value.toString());
-    hasUp.value = true;
-  }
+  Give(giveParams).then((res: any) => {
+    if (res) {
+      upNum.value = res.give;
+    }
+  });
 };
 const getView = () => {
-  if (!hasView.value) {
-    viewNum.value += 1;
-    hasView.value = true;
-  } else {
-    return false;
-  }
+  getInsert(InserParams).then((res: any) => {
+    if (res) {
+      viewNum.value = res.browse;
+    }
+  });
 };
 const getDetail = () => {
   dialogShow.value = true;
@@ -30,12 +41,21 @@ const getDetail = () => {
 };
 onMounted(() => {
   getView();
-  if (localStorage.getItem('upNum') == null) {
-    localStorage.setItem('upNum', '0');
-  } else {
-    upNum.value = Number(localStorage.getItem('upNum'));
-  }
+  getValue();
 });
+
+const getVedio = () => {
+  show.value = true;
+};
+const getValue = () => {
+  getCountry().then((res: any) => {
+    if (res) {
+      src.value = res.data[0].country_video;
+      content.value = res.data[0].country_brief;
+      upNum.value = res.data[0].give;
+    }
+  });
+};
 </script>
 
 <template>
@@ -68,11 +88,21 @@ onMounted(() => {
   <View
     :dialog="dialogShow"
     :title="title"
+    :content="content"
     @close="
       () => {
         dialogShow = false;
       }
     "
+  />
+  <Video
+    :show="show"
+    @close="
+      () => {
+        show = false;
+      }
+    "
+    :src="src"
   />
 </template>
 

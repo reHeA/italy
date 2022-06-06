@@ -36,11 +36,17 @@ const themeVars = {
       @close="$emit('close')"
       closeOnClickOverlay
     >
-      {{ content }}
+    <div class="content">    {{ content }}</div>
     </van-dialog>
   </van-config-provider>
 </template>
 
 
 <style scoped>
+.content{
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 24px;
+  padding: 16px;
+}
 </style>

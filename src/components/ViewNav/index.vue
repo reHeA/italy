@@ -9,7 +9,7 @@
         <i class="iconfont icon-menu" />
         <div class="iconTitle">场景选择</div>
       </div>
-      <div class="iconWraapper">
+      <div class="iconWraapper" @click="showVideo">
         <i class="iconfont icon-vedio" />
         <div class="iconTitle">VR宣传片</div>
       </div>
@@ -32,20 +32,70 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue';
-import {useRoute,useRouter} from 'vue-router' 
-const router = useRouter()
+import { onMounted, ref, watch, reactive } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { Give, getInsert } from '@/api/user';
+const src = ref<string>('');
+const show = ref<boolean>(false);
+const router = useRouter();
 const goBack = () => {
-  router.push('/map')
+  router.push('/map');
 };
-const $emit = defineEmits(['getShow'])
-const upNum = ref<number>(0);
-
-const viewNum = ref<number>(0);
-
-const changeShow = () =>{
-  $emit('getShow')
+const giveParams = reactive({
+  type: 2,
+  give_id: 0
+});
+interface p {
+  giveId: any;
+  upVal: number;
 }
+const props = withDefaults(defineProps<p>(), {
+  upVal: 0,
+  giveId: null
+});
+const InserParams = reactive({
+  type: 2,
+  browse_id: null
+});
+watch(
+  () => props,
+  (newVal, oldVal) => {
+    upNum.value = newVal.upVal;
+    giveParams.give_id = newVal.giveId;
+    InserParams.browse_id = newVal.giveId;
+  getView();
+
+  },
+  { deep: true }
+);
+onMounted(() => {
+});
+const $emit = defineEmits(['getShow', 'cityView', 'showVideo']);
+const upNum = ref<number>(0);
+const viewNum = ref<number>(0);
+const showVideo = () => {
+  $emit('showVideo');
+};
+const changeShow = () => {
+  $emit('getShow');
+};
+const getDetail = () => {
+  $emit('cityView');
+};
+const getUp = () => {
+  Give(giveParams).then((res: any) => {
+    if (res) {
+      upNum.value = res.give;
+    }
+  });
+};
+const getView = () => {
+  getInsert(InserParams).then((res: any) => {
+    if (res) {
+      viewNum.value = res.browse;
+    }
+  });
+};
 </script>
 
 <style scoped>

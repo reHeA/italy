@@ -9,23 +9,25 @@ import store from '@/store';
 import { baseUrl } from '@/config';
 import { getToken } from '@/utils/cookies';
 const service = axios.create({
-  baseURL: baseUrl,
+  baseURL: '',
   timeout: 5000,
   withCredentials: false
 });
 
 service.interceptors.request.use(
   (config: AxiosRequestConfig) => {
-    const token = store.state.token || getToken();
-    if (token) {
-      if (!config) {
-        config = {};
-      }
-      if (!config.headers) {
-        config.headers = {};
-      }
-      config.headers.Authorization = 'Bearer ' + token;
+    // const token = store.state.token || getToken();
+    // if (token) {
+    //   if (!config) {
+    //     config = {};
+    //   }
+    if (!config.headers) {
+      config.headers = {
+      };
     }
+    // config.headers.dataType = 'jsonp';
+    //   // config.headers.Authorization = 'Bearer ' + token;
+    // }
     return config;
   },
   (error: any) => {
@@ -40,22 +42,10 @@ service.interceptors.response.use(
     if (status === 200) {
       const res: any = response.data || {};
       const { code } = res;
-      const message = res.msg || '';
+      const message = res.message || '';
       if (code === 200) {
-        return res.data;
-      } else {
-        // code为1代表操作失败,code为1002代表没有权限
-        if (code === 1 || code === 1002) {
-          Notify({ type: 'danger', message: message });
-          return Promise.reject(message);
-        }
-        if (code === 401) {
-          // code为401代表后端设置授权过期， status为401代表jwt自动返回的过期
-          Toast('授权已过期');
-          //退出登录 操作
-          return Promise.reject(message);
-        }
-      }
+        return res;
+      } 
     }
   },
   (error: any) => {

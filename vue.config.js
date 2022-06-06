@@ -14,18 +14,18 @@ module.exports = {
       //  当出现编译器错误或警告时，在浏览器中显示全屏覆盖层
       warnings: false,
       errors: true
+    },
+    proxy: {
+      "": {
+        target: `http://api.italyvirtualtour.cn/`,
+        changeOrigin: true,
+      },
+
+      // "/js": {
+      //   target: `http://www.italyvirtualtour.cn/`,
+      //   changeOrigin: true,
+      // },
     }
-    //配置跨域
-    // proxy: {
-    //   '/api': {
-    //       target: "https://test.xxx.com",
-    //       // ws: true, // 是否启用websockets
-    //       changOrigin:true, // 开启代理，在本地创建一个虚拟服务端
-    //       pathRewrite:{
-    //           '^/api':'/'
-    //       }
-    //   }
-    // }
   },
   configureWebpack: config => {
     // 生产环境配置
@@ -47,7 +47,7 @@ module.exports = {
       // 单独打包第三方模块
       prodConfig.optimization(config);
       // gZip压缩
-      prodConfig.assetsGzip(config);
+      // prodConfig.assetsGzip(config);
       // 代码压缩
       prodConfig.codeUglify(config);
     });

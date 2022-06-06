@@ -1,7 +1,7 @@
 <template>
   <div id="panorama" ref="panor"></div>
-  <Swipe v-if="show" />
-  <ViewNav @getShow="getShow" @cityView="cityView" :upVal="upVal" :giveId="giveId" :src="src" @showVideo="showVideo"/>
+  <Swipe v-if="show" @getCover="getCover" />
+  <ViewNav @getShow="getShow" @cityView="cityView" :upVal="upVal" :giveId="giveId" :src="src" @showVideo="showVideo" />
   <CItyView
     :viewShow="viewShow"
     :imgList="imgList"
@@ -20,33 +20,34 @@
     :src="src"
   />
 </template>
-
 <script lang="ts" setup>
-import { getCity,getScenic} from '@/api/user';
+import { getCity, getScenic } from '@/api/user';
 import Video from '@/components/Video/index.vue';
 import CItyView from '@/components/CityView/index.vue';
 import Swipe from '@/components/Swipe/index.vue';
 import ViewNav from '../../components/ViewNav/index.vue';
-import { onBeforeMount, onMounted, reactive, ref } from 'vue';
+import { onBeforeMount, onMounted, reactive, ref, watch } from 'vue';
+const imageCover = ref<any>(require('../../assets/style/image/test1.jpg'));
+const swipeData = ref<any[]>();
 const show = ref<boolean>(false);
 const panor = ref<any>(null);
 const viewShow = ref<boolean>(false);
 const imgList = ref<any[]>([]);
 const giveId = ref<number>();
 const src = ref<string>();
-const videoShow = ref<boolean>(false)
-const loadMainJScript = () => {
-  const script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src = 'http://www.italyvirtualtour.cn/js/pannellum.js';
-  document.body.appendChild(script);
-  script.onload = () => {
-    showVr();
-  };
-};
+const videoShow = ref<boolean>(false);
+// const loadMainJScript = () => {
+//   const script = document.createElement('script');
+//   script.type = 'text/javascript';
+//   script.src = './../js/pannellum.js';
+//   document.body.appendChild(script);
+//   script.onload = () => {
+//     showVr();
+//   };
+// };
 const ScenicParams = reactive({
-  city_id:1
-})
+  city_id: 2
+});
 const upVal = ref<number>();
 const getShow = () => {
   show.value = !show.value;
@@ -57,32 +58,48 @@ const cityView = () => {
 const closeView = () => {
   viewShow.value = false;
 };
-const showVideo = ()=>{
-  videoShow.value = true
-}
+const showVideo = () => {
+  videoShow.value = true;
+};
 onMounted(() => {
+  showVr();
   getDataList();
-  getScenic(ScenicParams)
+  getScenicData();
 });
-
-const getDataList = () => {
-  getCity().then((res: any) => {
+const getScenicData = async () => {
+  await getScenic(ScenicParams).then((res: any) => {
     if (res) {
-      imgList.value = res.data[0].city_back_imgs;
-      upVal.value = res.data[0].give;
-      giveId.value = res.data[0].id;
-      src.value = res.data[0].city_video;
-      localStorage.setItem('id',res.data[0].id)
-
+      swipeData.value = res.data;
     }
   });
 };
-loadMainJScript();
+const getDataList = async () => {
+  await getCity().then((res: any) => {
+    if (res) {
+      imgList.value = res.data[1].city_back_imgs;
+      upVal.value = res.data[1].give;
+      giveId.value = res.data[1].id;
+      src.value = res.data[1].city_video;
+      localStorage.setItem('id', res.data[1].id);
+    }
+  });
+};
+const getCover = (val: any) => {
+  imageCover.value = val.scenic_images;
+};
+watch(
+  () => imageCover.value,
+  (newVal, oldVal) => {
+    if (newVal) {
+      showVr();
+    }
+  }
+);
+// loadMainJScript();
 const showVr = () => {
   panor.value = pannellum.viewer('panorama', {
     type: 'equirectangular',
-    panorama: require('../../assets/style/image/test1.jpg'),
-    autoRotate: -3,
+    panorama: 'http://api.italyvirtualtour.cn/scenic/scenic_images/202205/8ee5cf6f14c0813f2ee5e2ba43ea3407.jpg',
     autoLoad: true,
     showControls: false,
     pitch: 2.3,

@@ -1,9 +1,9 @@
 <template>
   <div class="swipe">
-    <van-swipe :loop="false" :width="140" :height="80" :initial-swipe="3" :show-indicators="false" ref="swipe">
-      <van-swipe-item v-for="(item, index) in viewData" :key="index" @click="changeView(index)">
-        <div class="imgBox" :style="{ border: fouceNum == index ? '2px solid #fff' : 'none' }">
-          <img :src="item.url" alt="" class="viewImg" />
+    <van-swipe :loop="false" :width="120" :height="84" :initial-swipe="0" :show-indicators="false" ref="swipe">
+      <van-swipe-item v-for="(item, index) in viewData" :key="index" @click="changeView(item, index)">
+        <div class="imgBox" :style="{ border: index == fouceNum ? '2px solid #fff' : 'none' }">
+          <img :src="item.scenic_cover" alt="" class="viewImg" />
         </div>
       </van-swipe-item>
     </van-swipe>
@@ -11,30 +11,32 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
+import { getScenic } from '@/api/user';
 const viewData = ref<any>([]);
 const fouceNum = ref<number>(0);
 const swipe = ref<any>();
 onMounted(() => {
-  viewData.value = [
-    { url: require('@/assets/style/image/viewList/thumb (1).jpg') },
-    { url: require('@/assets/style/image/viewList/thumb (2).jpg') },
-    { url: require('@/assets/style/image/viewList/thumb (3).jpg') },
-    { url: require('@/assets/style/image/viewList/thumb.jpg') },
-    { url: require('@/assets/style/image/viewList/thumb (1).jpg') },
-    { url: require('@/assets/style/image/viewList/thumb (2).jpg') },
-    { url: require('@/assets/style/image/viewList/thumb (3).jpg') }
-  ];
+  getData();
 });
-const changeView = (val: number) => {
-  fouceNum.value = val;
-  swipe.value.swipeTo(val == 0 ? val : val - 1, '');
+const getData = async () => {
+  getScenic({ city_id: localStorage.getItem('id') }).then((res: any) => {
+    if (res) {
+      viewData.value = res.data;
+    }
+  });
+};
+const $emit = defineEmits(['getCover']);
+const changeView = (item: any, index: any) => {
+  fouceNum.value = index;
+  swipe.value.swipeTo(index == 0 ? index : index - 1, '');
+  $emit('getCover', item);
 };
 </script>
-
 <style scoped>
 .swipe {
   width: 100%;
+  height: 102px;
   position: fixed;
   bottom: 10%;
   z-index: 1;
@@ -48,22 +50,17 @@ const changeView = (val: number) => {
 .swipe::-webkit-scrollbar {
   display: none;
 }
-.view {
-  width: 120px;
-  height: 80px;
+.imgBox {
+  width: 100%;
+  height: 78px;
   overflow: hidden;
-  margin-right: 8px;
-  box-sizing: border-box;
-}
-.imgBox{
-    width: 120px;
-  height: 120px;
-  overflow: hidden;
-  box-sizing: border-box;
-  
+  border-radius: 4px;
 }
 .viewImg {
-  width: 120px;
-  height: 120px;
+  width: 100%;
+  height: 78px;
+}
+>>> .van-swipe-item {
+  margin-right: 24px;
 }
 </style>

@@ -3,6 +3,9 @@ import { nextTick, onMounted, ref, components } from 'vue';
 import ButNav from '@/components/ButNav/index.vue';
 import * as echarts from 'echarts';
 import Italy from './Italy.json';
+import { useRoute, useRouter } from 'vue-router';
+const router = useRouter();
+
 onMounted(() => {
   nextTick(() => {
     initMap();
@@ -11,15 +14,14 @@ onMounted(() => {
 const initMap = () => {
   const chartDom: HTMLElement | null = document.getElementById('main');
   const charts = echarts.init(chartDom);
-  const Veniceicon: string = '';
-  var Firenzeicon: string = '';
-  var iconBs: string = '';
-  var Palermoicon: string = '';
-  var iconlm: string = '';
-  var iconsln: string = '';
-  var iconml: string = '';
+  const Veniceicon = 'image://http://www.italyvirtualtour.cn/icon/Venice.png';
+  const Firenzeicon: string = 'image://http://www.italyvirtualtour.cn/icon/Florence.png';
+  const Pisaicon: string = 'image://http://www.italyvirtualtour.cn/icon/Pisa.png';
+  const Palermoicon: string = 'image://http://www.italyvirtualtour.cn/icon/Palermo.png';
+  const Romeicon: string = 'image://http://www.italyvirtualtour.cn/icon/Rome.png';
+  const Naplesicon: string = 'image://http://www.italyvirtualtour.cn/icon/Naples.png';
+  const Milanicon: string = 'image://http://www.italyvirtualtour.cn/icon/Milan.png';
   const data: any = Italy;
-  echarts.registerMap('italy', data);
   var geoCoordMap = {
     威尼斯: [12.322281, 45.441252],
     佛罗伦萨: [11.256387, 43.788085],
@@ -29,6 +31,21 @@ const initMap = () => {
     米兰: [9.189982, 45.474316],
     萨莱诺: [14.765024, 40.685509]
   };
+  echarts.registerMap('italy', data);
+  var convertData = function (data: any) {
+    var res = [];
+    for (var i = 0; i < data.length; i++) {
+      var geoCoord = geoCoordMap[data[i].name];
+      if (geoCoord) {
+        res.push({
+          name: data[i].name,
+          value: geoCoord.concat(data[i].value)
+        });
+      }
+    }
+    return res;
+  };
+
   var data1 = [
     {
       name: '威尼斯'
@@ -106,7 +123,6 @@ const initMap = () => {
     tooltip: {
       show: false
     },
-
     geo: {
       show: true,
       map: 'italy',
@@ -138,6 +154,11 @@ const initMap = () => {
       {
         type: 'effectScatter',
         coordinateSystem: 'geo',
+        data: convertData(
+          data1.sort(function (a: any, b: any) {
+            return b.value - a.value;
+          })
+        ),
         symbolSize: 12,
         showEffectOn: 'render',
         rippleEffect: {
@@ -168,6 +189,9 @@ const initMap = () => {
         coordinateSystem: 'geo',
         data: Venice,
         symbol: Veniceicon,
+        symbolSize: function (val: any) {
+          return val[2] / 7.5;
+        },
         label: {
           show: false,
           normal: {
@@ -194,6 +218,9 @@ const initMap = () => {
         coordinateSystem: 'geo',
         data: Firenze,
         symbol: Firenzeicon,
+        symbolSize: function (val: any) {
+          return val[2] / 7.5;
+        },
         label: {
           normal: {
             show: false,
@@ -221,6 +248,9 @@ const initMap = () => {
         coordinateSystem: 'geo',
         data: Palermo,
         symbol: Palermoicon,
+        symbolSize: function (val: any) {
+          return val[2] / 7.5;
+        },
         label: {
           normal: {
             show: false,
@@ -245,7 +275,10 @@ const initMap = () => {
         type: 'scatter',
         coordinateSystem: 'geo',
         data: bisa,
-        symbol: iconBs,
+        symbol: Pisaicon,
+        symbolSize: function (val: any) {
+          return val[2] / 7.5;
+        },
         label: {
           normal: {
             show: true,
@@ -273,7 +306,10 @@ const initMap = () => {
         type: 'scatter',
         coordinateSystem: 'geo',
         data: milan,
-        symbol: iconml,
+        symbol: Milanicon,
+        symbolSize: function (val: any) {
+          return val[2] / 7.5;
+        },
         label: {
           normal: {
             show: true,
@@ -301,7 +337,10 @@ const initMap = () => {
         type: 'scatter',
         coordinateSystem: 'geo',
         data: luoma,
-        symbol: iconlm,
+        symbol: Romeicon,
+        symbolSize: function (val: any) {
+          return val[2] / 7.5;
+        },
         label: {
           normal: {
             show: true,
@@ -327,7 +366,10 @@ const initMap = () => {
         type: 'scatter',
         coordinateSystem: 'geo',
         data: sln,
-        symbol: iconsln,
+        symbol: Naplesicon,
+        symbolSize: function (val: any) {
+          return val[2] / 7.5;
+        },
         label: {
           normal: {
             show: true,
@@ -353,6 +395,20 @@ const initMap = () => {
     ]
   };
   charts.setOption(option);
+  charts.on('click', function (params) {
+    console.log(params, 'params');
+    switch (params.name) {
+      case '威尼斯':
+        router.push('/venice');
+        break;
+      case '佛罗伦萨':
+        router.push('/florence');
+        break;
+      case '巴勒莫':
+        router.push('/palermo');
+        break;
+    }
+  });
 };
 </script>
 <template>
