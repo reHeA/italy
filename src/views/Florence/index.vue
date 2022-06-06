@@ -1,5 +1,5 @@
 <template>
-  <div id="panorama" ref="panor"></div>
+  <div id="panorama" ref="panor" @mousedown="toView"></div>
   <Swipe v-if="show" @getCover="getCover" />
   <ViewNav @getShow="getShow" @cityView="cityView" :upVal="upVal" :giveId="giveId" :src="src" @showVideo="showVideo" />
   <CItyView
@@ -27,8 +27,8 @@ import CItyView from '@/components/CityView/index.vue';
 import Swipe from '@/components/Swipe/index.vue';
 import ViewNav from '../../components/ViewNav/index.vue';
 import { onBeforeMount, onMounted, reactive, ref, watch } from 'vue';
-const imageCover = ref<any>(require('../../assets/style/image/test1.jpg'));
-const swipeData = ref<any[]>();
+const imageCover = ref<any>();
+const swipeData = ref<any[]>([]);
 const show = ref<boolean>(false);
 const panor = ref<any>(null);
 const viewShow = ref<boolean>(false);
@@ -36,6 +36,7 @@ const imgList = ref<any[]>([]);
 const giveId = ref<number>();
 const src = ref<string>();
 const videoShow = ref<boolean>(false);
+const isCity = ref<boolean>(false);
 const ScenicParams = reactive({
   city_id: 2
 });
@@ -44,13 +45,28 @@ const getShow = () => {
   show.value = !show.value;
 };
 const cityView = () => {
-  viewShow.value = true;
+  if (isCity.value) {
+    isCity.value = false;
+    getDataList();
+    viewShow.value = true;
+  } else {
+    viewShow.value = true;
+  }
 };
 const closeView = () => {
   viewShow.value = false;
 };
 const showVideo = () => {
   videoShow.value = true;
+};
+const toView = (val: any) => {
+  swipeData.value.map((item: any) => {
+    if (val.toElement.innerHTML == item.scenic_name) {
+      isCity.value = true;
+      imgList.value = item.scenic_back_imgs;
+      viewShow.value = true;
+    }
+  });
 };
 onMounted(() => {
   showVr();
@@ -61,6 +77,7 @@ const getScenicData = async () => {
   await getScenic(ScenicParams).then((res: any) => {
     if (res) {
       swipeData.value = res.data;
+      imageCover.value = res.data[0].scenic_images;
     }
   });
 };
@@ -78,15 +95,22 @@ const getDataList = async () => {
 const getCover = (val: any) => {
   imageCover.value = val.scenic_images;
 };
+const removeDom = () => {
+  const dom: HTMLElement | null = document.getElementById('panorama');
+  if (dom?.hasChildNodes()) {
+    dom.removeChild(dom.childNodes[0]);
+  }
+};
 watch(
   () => imageCover.value,
   (newVal, oldVal) => {
     if (newVal) {
+      removeDom();
+      removeDom();
       showVr();
     }
   }
 );
-// loadMainJScript();
 const showVr = () => {
   panor.value = pannellum.viewer('panorama', {
     type: 'equirectangular',
@@ -105,13 +129,15 @@ const showVr = () => {
         cssClass: 'custom-hotspot',
         createTooltipFunc: hotspot,
         createTooltipArgs: '花之圣母大教堂'
+      },
+      {
+        pitch: 0.4,
+        yaw: 89,
+        type: 'info',
+        cssClass: 'custom-hotspot',
+        createTooltipFunc: hotspot1,
+        createTooltipArgs: '圣十字大教堂'
       }
-      // {
-      //   pitch: -9.4,
-      //   yaw: 222.6,
-      //   type: 'info',
-      //   text: 'Art Museum Drive'
-      // },
       // {
       //   pitch: -0.9,
       //   yaw: 144.4,
@@ -125,14 +151,36 @@ const showVr = () => {
 const hotspot = (hotSpotDiv: any, args: any) => {
   hotSpotDiv.classList.add('custom-tooltip');
   var span = document.createElement('span');
+  var img = document.createElement('img');
   span.innerHTML = args;
   hotSpotDiv.appendChild(span);
+  hotSpotDiv.appendChild(img);
   span.style.fontSize = 12 + 'px';
   span.style.color = '#fff';
   span.style.width = span.scrollWidth - 20 + 'px';
   span.style.padding = 4 + 'px';
   span.style.background = 'darkgray';
   span.style.borderRadius = 6 + 'px';
+  img.style.width = '100%';
+  img.style.height = 40 + 'px';
+  img.src = '';
+};
+const hotspot1 = (hotSpotDiv: any, args: any) => {
+  hotSpotDiv.classList.add('custom-tooltip');
+  var span = document.createElement('span');
+  var img = document.createElement('img');
+  span.innerHTML = args;
+  hotSpotDiv.appendChild(span);
+  hotSpotDiv.appendChild(img);
+  span.style.fontSize = 12 + 'px';
+  span.style.color = '#fff';
+  span.style.width = span.scrollWidth - 20 + 'px';
+  span.style.padding = 4 + 'px';
+  span.style.background = 'darkgray';
+  span.style.borderRadius = 6 + 'px';
+  img.style.width = '100%';
+  img.style.height = 40 + 'px';
+  img.src = '';
 };
 </script>
 
