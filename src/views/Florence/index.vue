@@ -44,6 +44,7 @@ const upVal = ref<number>();
 const getShow = () => {
   show.value = !show.value;
 };
+const hostList = ref<any>([]);
 const cityView = () => {
   if (isCity.value) {
     isCity.value = false;
@@ -138,14 +139,7 @@ const showVr = () => {
         createTooltipFunc: hotspot1,
         createTooltipArgs: '圣十字大教堂'
       }
-      // {
-      //   pitch: -0.9,
-      //   yaw: 144.4,
-      //   type: 'info',
-      //   text: 'North Charles Street'
-      // }
     ]
-    // preview: '/images/tocopilla-preview.jpg'
   });
 };
 const hotspot = (hotSpotDiv: any, args: any) => {
