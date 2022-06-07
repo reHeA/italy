@@ -9,6 +9,8 @@
     @getData="getDataList"
     :upVal="upVal"
     :giveId="giveId"
+    :breifTitle="breifTitle"
+    :briefContent="briefContent"
   />
   <Video
     :show="videoShow"
@@ -27,6 +29,8 @@ import CItyView from '@/components/CityView/index.vue';
 import Swipe from '@/components/Swipe/index.vue';
 import ViewNav from '../../components/ViewNav/index.vue';
 import { onBeforeMount, onMounted, reactive, ref, watch } from 'vue';
+const breifTitle = ref<string>('');
+const briefContent = ref<string>('');
 const imageCover = ref<any>();
 const swipeData = ref<any[]>([]);
 const show = ref<boolean>(false);
@@ -65,6 +69,8 @@ const toView = (val: any) => {
     if (val.toElement.innerHTML == item.scenic_name) {
       isCity.value = true;
       imgList.value = item.scenic_back_imgs;
+      breifTitle.value = item.scenic_name;
+      briefContent.value = item.scenic_brief;
       viewShow.value = true;
     }
   });
@@ -89,6 +95,8 @@ const getDataList = async () => {
       upVal.value = res.data[1].give;
       giveId.value = res.data[1].id;
       src.value = res.data[1].city_video;
+      breifTitle.value = res.data[1].city_name;
+      briefContent.value = res.data[1].city_brief;
       localStorage.setItem('id', res.data[1].id);
     }
   });

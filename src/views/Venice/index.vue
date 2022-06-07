@@ -35,15 +35,6 @@ const imgList = ref<any[]>([]);
 const giveId = ref<number>();
 const src = ref<string>();
 const videoShow = ref<boolean>(false)
-const loadMainJScript = () => {
-  const script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src = 'http://www.italyvirtualtour.cn/js/pannellum.js';
-  document.body.appendChild(script);
-  script.onload = () => {
-    showVr();
-  };
-};
 const ScenicParams = reactive({
   city_id:1
 })
@@ -62,6 +53,7 @@ const showVideo = ()=>{
 }
 onMounted(() => {
   getDataList();
+  showVr()
   getScenic(ScenicParams)
 });
 
@@ -77,11 +69,10 @@ const getDataList = () => {
     }
   });
 };
-loadMainJScript();
 const showVr = () => {
   panor.value = pannellum.viewer('panorama', {
     type: 'equirectangular',
-    panorama: require('../../assets/style/image/test1.jpg'),
+    panorama: '',
     autoRotate: -3,
     autoLoad: true,
     showControls: false,

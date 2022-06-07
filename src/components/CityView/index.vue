@@ -11,7 +11,10 @@
       :swipeDuratio="300"
     >
       <template #cover>
-          <div class=""></div>
+        <div class="brief" v-show="isShow">
+          <div class="header">一部手机云游意大利:{{ breifTitle }}</div>
+          <div class="content">{{ briefContent }}</div>
+        </div>
         <div class="nav">
           <div>
             <div class="iconWraapper" @click="toMap">
@@ -45,7 +48,7 @@ import { Give } from '@/api/user';
 import { number } from 'echarts';
 import { useRoute, useRouter } from 'vue-router';
 const router = useRouter();
-
+const isShow = ref<boolean>(false);
 const show = ref<boolean>(false);
 const index = ref<number>(0);
 const upNum = ref<number>(0);
@@ -53,15 +56,22 @@ interface p {
   viewShow: boolean;
   imgList: any;
   upVal: any;
-  giveId:any
+  giveId: any;
+  briefContent?: string;
+  breifTitle?: string;
 }
 const $emit = defineEmits(['closeView', 'getData']);
 const props = withDefaults(defineProps<p>(), {
   viewShow: false,
   imgList: [],
   upVal: 0,
-  giveId:null
+  giveId: null,
+  briefContent: '',
+  breifTitle: ''
 });
+const getDetail = () => {
+  isShow.value = !isShow.value;
+};
 const giveParams = reactive({
   type: 2,
   give_id: null
@@ -73,6 +83,9 @@ const toMap = () => {
   router.push('/map');
 };
 const toGo = () => {
+  if (isShow.value) {
+    isShow.value = false;
+  }
   $emit('closeView');
 };
 watch(
@@ -81,7 +94,7 @@ watch(
     show.value = newVal;
     images.value = props.imgList;
     upNum.value = props.upVal;
-    giveParams.give_id = props.giveId
+    giveParams.give_id = props.giveId;
   }
 );
 const images = ref<any[]>([]);
@@ -127,5 +140,23 @@ const close = () => {
 .iconTitle {
   font-size: 8px;
   margin-top: 8px;
+}
+.brief {
+  width: 100%;
+  position: fixed;
+  background-color: #fff;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+.header {
+  text-align: center;
+  font-size: 14px;
+  padding: 6px 0;
+}
+.content {
+  font-size: 12px;
+  font-weight: bold;
+  padding: 4px;
+  line-height: 24px;
 }
 </style>

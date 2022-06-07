@@ -9,7 +9,7 @@ import store from '@/store';
 import { baseUrl } from '@/config';
 import { getToken } from '@/utils/cookies';
 const service = axios.create({
-  baseURL: '',
+  baseURL: 'http://api.italyvirtualtour.cn/',
   timeout: 5000,
   withCredentials: false
 });
