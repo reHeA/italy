@@ -4,6 +4,7 @@
       <van-swipe-item v-for="(item, index) in viewData" :key="index" @click="changeView(item, index)">
         <div class="imgBox" :style="{ border: index == fouceNum ? '2px solid #fff' : 'none' }">
           <img :src="item.scenic_cover" alt="" class="viewImg" />
+          <div class="name">{{item.scenic_name}}</div>
         </div>
       </van-swipe-item>
     </van-swipe>
@@ -55,10 +56,21 @@ const changeView = (item: any, index: any) => {
   height: 78px;
   overflow: hidden;
   border-radius: 4px;
+  position: relative;
 }
 .viewImg {
   width: 100%;
   height: 78px;
+}
+.name{
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translate(-50%,0);
+  font-size: 12px;
+  color: #fff;
+  width: 120px;
+  text-align: center;
 }
 >>> .van-swipe-item {
   margin-right: 24px;

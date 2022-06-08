@@ -1,5 +1,5 @@
 <template>
-  <div id="panorama" ref="panor" @mousedown="toView"></div>
+  <div id="panorama" ref="panor" @mousedown="toView" @scenechangefadedone="scenechange"></div>
   <Swipe v-if="show" @getCover="getCover" />
   <ViewNav @getShow="getShow" @cityView="cityView" :upVal="upVal" :giveId="giveId" :src="src" @showVideo="showVideo" />
   <CItyView
@@ -44,6 +44,7 @@ const isCity = ref<boolean>(false);
 const ScenicParams = reactive({
   city_id: 2
 });
+const cityIndex = ref<any>(0);
 const upVal = ref<number>();
 const getShow = () => {
   show.value = !show.value;
@@ -74,6 +75,9 @@ const toView = (val: any) => {
       viewShow.value = true;
     }
   });
+};
+const scenechange = (id: any) => {
+  console.log(id, 'val');
 };
 onMounted(() => {
   showVr();
@@ -122,32 +126,313 @@ watch(
 );
 const showVr = () => {
   panor.value = pannellum.viewer('panorama', {
-    type: 'equirectangular',
-    panorama: imageCover.value,
-    autoLoad: true,
-    autoRotate: -2,
-    showControls: false,
-    pitch: 5.3,
-    yaw: -135.4,
-    hfov: 120,
-    hotSpots: [
-      {
-        pitch: 10.1,
-        yaw: 1.5,
-        type: 'info',
-        cssClass: 'custom-hotspot',
-        createTooltipFunc: hotspot,
-        createTooltipArgs: '花之圣母大教堂'
+    default: {
+      firstScene: 'mikailangqiluo',
+      // author: 'Matthew Petroff',
+      sceneFadeDuration: 1000,
+      autoLoad: true,
+      autoRotate: -2
+    },
+    scenes: {
+      circle: {
+        // title: 'Mason Circle',
+        hfov: 30,
+        pitch: -3,
+        yaw: 117,
+        type: 'equirectangular',
+        panorama: imageCover.value,
+        hotSpots: [
+          {
+            pitch: 10.1,
+            yaw: 1.5,
+            type: 'info',
+            cssClass: 'custom-hotspot',
+            createTooltipFunc: hotspot,
+            createTooltipArgs: '花之圣母大教堂'
+          },
+          {
+            pitch: 0.4,
+            yaw: 89,
+            type: 'scene',
+            cssClass: 'custom-hotspot',
+            createTooltipFunc: hotspot1,
+            createTooltipArgs: '圣十字大教堂',
+            sceneId: 'house'
+          }
+        ]
       },
-      {
-        pitch: 0.4,
-        yaw: 89,
-        type: 'info',
-        cssClass: 'custom-hotspot',
-        createTooltipFunc: hotspot1,
-        createTooltipArgs: '圣十字大教堂'
+
+      house: {
+        hfov: 30,
+        yaw: 5,
+        type: 'equirectangular',
+        panorama: require('../../assets/img//shizi.jpg'),
+        hotSpots: [
+          {
+            pitch: 10.1,
+            yaw: 1.5,
+            type: 'info',
+            cssClass: 'custom-hotspot',
+            createTooltipFunc: hotspot,
+            createTooltipArgs: '圣十字大教堂'
+          },
+          {
+            pitch: -0.6,
+            yaw: 37.1,
+            type: 'scene',
+            cssClass: 'custom-hotspot',
+            createTooltipFunc: hotspot1,
+            createTooltipArgs: '领主广场',
+            sceneId: 'lingzhu',
+            targetYaw: -23,
+            targetPitch: 2
+          }
+        ]
+      },
+      lingzhu: {
+        hfov: 30,
+        yaw: 5,
+        type: 'equirectangular',
+        panorama: require('../../assets/img//lingzhu.jpg'),
+        hotSpots: [
+          {
+            pitch: 185,
+            yaw: -60,
+            type: 'info',
+            cssClass: 'custom-hotspot',
+            createTooltipFunc: hotspot,
+            createTooltipArgs: '领主广场'
+          },
+          {
+            pitch: 160,
+            yaw: -20,
+            type: 'info',
+            cssClass: 'custom-hotspot',
+            createTooltipFunc: hotspot,
+            createTooltipArgs: '佛罗伦萨露天博物馆'
+          },
+          {
+            pitch: 190,
+            yaw: 37.1,
+            type: 'scene',
+            cssClass: 'custom-hotspot',
+            createTooltipFunc: hotspot1,
+            createTooltipArgs: '比斯广场',
+            sceneId: 'bisi',
+            targetYaw: -23,
+            targetPitch: 2
+          }
+        ]
+      },
+      bisi: {
+        hfov: 30,
+        yaw: 5,
+        type: 'equirectangular',
+        panorama: require('../../assets/img//bisi.jpg'),
+        hotSpots: [
+          {
+            pitch: 180,
+            yaw: 35,
+            type: 'info',
+            cssClass: 'custom-hotspot',
+            createTooltipFunc: hotspot,
+            createTooltipArgs: '佣兵凉廊'
+          },
+          {
+            pitch: -10,
+            yaw: -15,
+            type: 'scene',
+            cssClass: 'custom-hotspot',
+            createTooltipFunc: hotspot1,
+            createTooltipArgs: '佛罗伦萨老桥',
+            sceneId: 'laoqiao',
+            targetYaw: -23,
+            targetPitch: 2
+          }
+        ]
+      },
+      laoqiao: {
+        hfov: 30,
+        yaw: 5,
+        type: 'equirectangular',
+        panorama: require('../../assets/img//laoqiao.jpg'),
+        hotSpots: [
+          {
+            pitch: 180.6,
+            yaw: 2.1,
+            type: 'info',
+            cssClass: 'custom-hotspot',
+            createTooltipFunc: hotspot,
+            createTooltipArgs: '佛罗伦萨老桥'
+          },
+          {
+            pitch: -0.6,
+            yaw: 85.1,
+            type: 'scene',
+            cssClass: 'custom-hotspot',
+            createTooltipFunc: hotspot1,
+            createTooltipArgs: '切利尼雕像',
+            sceneId: 'qielini',
+            targetYaw: -23,
+            targetPitch: 2
+          }
+        ]
+      },
+      qielini: {
+        hfov: 30,
+        yaw: 5,
+        type: 'equirectangular',
+        panorama: require('../../assets/img//qielini.jpg'),
+        hotSpots: [
+          {
+            pitch: -0.6,
+            yaw: 4.1,
+            type: 'info',
+            cssClass: 'custom-hotspot',
+            createTooltipFunc: hotspot,
+            createTooltipArgs: '切利尼雕像'
+          },
+          {
+            pitch: -10.6,
+            yaw: 87.1,
+            type: 'scene',
+            cssClass: 'custom-hotspot',
+            createTooltipFunc: hotspot1,
+            createTooltipArgs: '米开朗基罗广场',
+            sceneId: 'mikailangqiluo',
+            targetYaw: -23,
+            targetPitch: 2
+          }
+        ]
+      },
+      mikailangqiluo: {
+        hfov: 30,
+        yaw: 5,
+        type: 'equirectangular',
+        panorama: require('../../assets/img//mikailangqiluo.jpg'),
+        hotSpots: [
+          {
+            pitch: -0.6,
+            yaw: -5.1,
+            type: 'info',
+            cssClass: 'custom-hotspot',
+            createTooltipFunc: hotspot,
+            createTooltipArgs: '大卫铜像'
+          },
+        ]
+      },
+      city: {
+        hfov: 20,
+        yaw: 5,
+        type: 'equirectangular',
+        panorama: require('../../assets/img//city.jpg'),
+        hotSpots: [
+          {
+            pitch: -0.6,
+            yaw: 37.1,
+            type: 'scene',
+            text: 'Mason Circle',
+            sceneId: 'boboli',
+            targetYaw: -23,
+            targetPitch: 2
+          }
+        ]
+      },
+      boboli: {
+        hfov: 30,
+        yaw: 5,
+        type: 'equirectangular',
+        panorama: require('../../assets/img//boboli.jpg'),
+        hotSpots: [
+          {
+            pitch: -0.6,
+            yaw: 37.1,
+            type: 'scene',
+            text: 'Mason Circle',
+            sceneId: 'pigyin',
+            targetYaw: -23,
+            targetPitch: 2
+          }
+        ]
+      },
+      pigyin: {
+        hfov: 30,
+        yaw: 5,
+        type: 'equirectangular',
+        panorama: require('../../assets/img//pigyin.jpg'),
+        hotSpots: [
+          {
+            pitch: -0.6,
+            yaw: 37.1,
+            type: 'scene',
+            text: 'Mason Circle',
+            sceneId: 'art',
+            targetYaw: -23,
+            targetPitch: 2
+          }
+        ]
+      },
+      art: {
+        hfov: 30,
+        yaw: 5,
+        type: 'equirectangular',
+        panorama: require('../../assets/img//art.jpg'),
+        hotSpots: [
+          {
+            pitch: -0.6,
+            yaw: 37.1,
+            type: 'scene',
+            text: 'Mason Circle',
+            sceneId: 'big',
+            targetYaw: -23,
+            targetPitch: 2
+          }
+        ]
+      },
+      big: {
+        hfov: 30,
+        yaw: 5,
+        type: 'equirectangular',
+        panorama: require('../../assets/img//big.jpg'),
+        hotSpots: [
+          {
+            // pitch: -0.6,
+            // yaw: 37.1,
+            // type: 'scene',
+            // text: 'Mason Circle',
+            // sceneId: 'circle',
+            // targetYaw: -23,
+            // targetPitch: 2
+          }
+        ]
       }
-    ]
+    }
+    // type: 'equirectangular',
+    // panorama: imageCover.value,
+    // autoLoad: true,
+    // autoRotate: -2,
+    // showControls: false,
+    // pitch: 5.3,
+    // yaw: -135.4,
+    // hfov: 120,
+    // hotSpots: [
+    //   {
+    //     pitch: 10.1,
+    //     yaw: 1.5,
+    //     type: 'info',
+    //     cssClass: 'custom-hotspot',
+    //     createTooltipFunc: hotspot,
+    //     createTooltipArgs: '花之圣母大教堂'
+    //   },
+    //   {
+    //     pitch: 0.4,
+    //     yaw: 89,
+    //     type: 'info',
+    //     cssClass: 'custom-hotspot',
+    //     createTooltipFunc: hotspot1,
+    //     createTooltipArgs: '圣十字大教堂'
+    //   }
+    // ]
   });
 };
 const hotspot = (hotSpotDiv: any, args: any) => {
@@ -165,7 +450,7 @@ const hotspot = (hotSpotDiv: any, args: any) => {
   span.style.borderRadius = 6 + 'px';
   img.style.width = '100%';
   img.style.height = 40 + 'px';
-  img.src = '';
+  img.src = 'http://www.italyvirtualtour.cn/img/new_spotd8_gif.png';
 };
 const hotspot1 = (hotSpotDiv: any, args: any) => {
   hotSpotDiv.classList.add('custom-tooltip');
@@ -183,6 +468,9 @@ const hotspot1 = (hotSpotDiv: any, args: any) => {
   img.style.width = '100%';
   img.style.height = 40 + 'px';
   img.src = '';
+};
+const changeScenes = (hotSpotDiv: any, args: any) => {
+  console.log(args, 'args');
 };
 </script>
 
