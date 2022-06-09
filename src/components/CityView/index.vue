@@ -4,11 +4,10 @@
       v-model:show="show"
       :images="images"
       @change="onChange"
-      closeable
       @Close="close"
-      :showIndex="false"
+      :showIndex="true"
       loop
-      :swipeDuratio="300"
+      :swipeDuratio="3"
     >
       <template #cover>
         <div class="brief" v-show="isShow">
@@ -116,7 +115,8 @@ const close = () => {
 
 <style scoped>
 >>> .van-image-preview {
-  background-color: #000;
+  background-color:rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(6px)
 }
 .nav {
   width: 100%;

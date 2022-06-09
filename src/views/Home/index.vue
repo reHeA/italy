@@ -8,7 +8,7 @@ const changeShow = () => {
 
 </script>
 <template>
-  <van-nav-bar title="Virtual Tour" />
+  <!-- <van-nav-bar title="Virtual Tour" /> -->
   <div class="italy" @click="changeShow" ></div>
 </template>
 <style scoped>
