@@ -11,8 +11,12 @@
     >
       <template #cover>
         <div class="brief" v-show="isShow">
-          <div class="header">一部手机云游意大利:{{ breifTitle }}</div>
-          <div class="content">{{ briefContent }}</div>
+          <div class="bgcc">
+       
+          </div>
+               <div class="header"><div>{{ breifTitle }}</div><div>
+              </div>{{ briefContent }}</div>
+            <div class="content"></div>
         </div>
         <div class="nav">
           <div>
@@ -115,8 +119,16 @@ const close = () => {
 
 <style scoped>
 >>> .van-image-preview {
-  background-color:rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(6px)
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(6px);
+}
+.bgcc {
+  width: 100%;
+  height: 100%;
+  background-image: url('../../assets//flolunsaBgc.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  position: relative;
 }
 .nav {
   width: 100%;
@@ -143,6 +155,7 @@ const close = () => {
 }
 .brief {
   width: 100%;
+  height: 100%;
   position: fixed;
   background-color: #fff;
   top: 50%;
@@ -150,13 +163,30 @@ const close = () => {
 }
 .header {
   text-align: center;
-  font-size: 14px;
-  padding: 6px 0;
+  font-size: 0.37333rem;
+  padding: 0.16rem 0;
+  position: fixed;
+  top: 72%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 12px;
+  font-weight: bolder;
+  letter-spacing: 2px;
+  width: 100%;
+  line-height: 20px;
+  height: 440px;
 }
-.content {
+/* .content {
   font-size: 12px;
   font-weight: bold;
-  padding: 4px;
-  line-height: 24px;
-}
+  padding: 8px 8px;
+  line-height: 20px;
+  position: fixed;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  width: 100%;
+} */
 </style>
