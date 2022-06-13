@@ -11,12 +11,7 @@
     >
       <template #cover>
         <div class="brief" v-show="isShow">
-          <div class="bgcc">
-       
-          </div>
-               <div class="header"><div>{{ breifTitle }}</div><div>
-              </div>{{ briefContent }}</div>
-            <div class="content"></div>
+          <img :src="imgSrc" alt="" class="viewImg">
         </div>
         <div class="nav">
           <div>
@@ -62,7 +57,9 @@ interface p {
   giveId: any;
   briefContent?: string;
   breifTitle?: string;
+  
 }
+const imgSrc = ref<string>()
 const $emit = defineEmits(['closeView', 'getData']);
 const props = withDefaults(defineProps<p>(), {
   viewShow: false,
@@ -98,6 +95,7 @@ watch(
     images.value = props.imgList;
     upNum.value = props.upVal;
     giveParams.give_id = props.giveId;
+    imgSrc.value = props.briefContent.split('"')[1]
   }
 );
 const images = ref<any[]>([]);
@@ -125,7 +123,7 @@ const close = () => {
 .bgcc {
   width: 100%;
   height: 100%;
-  background-image: url('../../assets//flolunsaBgc.jpg');
+  background-image: url('../../assets/flolunsaBgc.jpg');
   background-repeat: no-repeat;
   background-size: 100% 100%;
   position: relative;
@@ -176,6 +174,11 @@ const close = () => {
   width: 100%;
   line-height: 20px;
   height: 440px;
+}
+.viewImg{
+  width: 100%;
+  height: 100%;
+  background-size: 100% 100%;
 }
 /* .content {
   font-size: 12px;

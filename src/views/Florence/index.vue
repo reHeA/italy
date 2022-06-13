@@ -35,7 +35,6 @@ import { onBeforeMount, onMounted, reactive, ref, watch } from 'vue';
 const MusicPlay = ref<any>();
 const MusicPlay1 = ref<any>();
 const MusicPlay2 = ref<any>();
-
 const breifTitle = ref<string>('');
 const briefContent = ref<string>('');
 const imageCover = ref<any>();
@@ -168,7 +167,7 @@ const showVr = () => {
         pitch: -3,
         yaw: 117,
         type: 'equirectangular',
-        panorama: require('../../assets/img//shenmu.jpg'),
+        panorama: require('../../assets/img/shenmu.jpg'),
         hotSpots: [
           {
             pitch: 10.1,
@@ -194,7 +193,7 @@ const showVr = () => {
         hfov: 30,
         yaw: 5,
         type: 'equirectangular',
-        panorama: require('../../assets/img//shizi.jpg'),
+        panorama: require('../../assets/img/shizi.jpg'),
         hotSpots: [
           {
             pitch: 10.1,
@@ -221,7 +220,7 @@ const showVr = () => {
         hfov: 30,
         yaw: 5,
         type: 'equirectangular',
-        panorama: require('../../assets/img//lingzhu.jpg'),
+        panorama: require('../../assets/img/lingzhu.jpg'),
         hotSpots: [
           {
             pitch: 185,
@@ -256,7 +255,7 @@ const showVr = () => {
         hfov: 30,
         yaw: 5,
         type: 'equirectangular',
-        panorama: require('../../assets/img//bisi.jpg'),
+        panorama: require('../../assets/img/bisi.jpg'),
         hotSpots: [
           {
             pitch: 180,
@@ -283,7 +282,7 @@ const showVr = () => {
         hfov: 30,
         yaw: 5,
         type: 'equirectangular',
-        panorama: require('../../assets/img//laoqiao.jpg'),
+        panorama: require('../../assets/img/laoqiao.jpg'),
         hotSpots: [
           {
             pitch: 180.6,
@@ -310,7 +309,7 @@ const showVr = () => {
         hfov: 30,
         yaw: 5,
         type: 'equirectangular',
-        panorama: require('../../assets/img//qielini.jpg'),
+        panorama: require('../../assets/img/qielini.jpg'),
         hotSpots: [
           {
             pitch: -0.6,
@@ -337,7 +336,7 @@ const showVr = () => {
         hfov: 30,
         yaw: 5,
         type: 'equirectangular',
-        panorama: require('../../assets/img//mikailangqiluo.jpg'),
+        panorama: require('../../assets/img/mikailangqiluo.jpg'),
         hotSpots: [
           {
             pitch: -0.6,
@@ -364,7 +363,7 @@ const showVr = () => {
         hfov: 20,
         yaw: 5,
         type: 'equirectangular',
-        panorama: require('../../assets/img//city.jpg'),
+        panorama: require('../../assets/img/city.jpg'),
         hotSpots: [
           //           {
           //   pitch: 190.6,
@@ -391,7 +390,7 @@ const showVr = () => {
         hfov: 30,
         yaw: 5,
         type: 'equirectangular',
-        panorama: require('../../assets/img//boboli.jpg'),
+        panorama: require('../../assets/img/boboli.jpg'),
         hotSpots: [
           {
             pitch: -10.6,
@@ -418,7 +417,7 @@ const showVr = () => {
         hfov: 30,
         yaw: 5,
         type: 'equirectangular',
-        panorama: require('../../assets/img//pigyin.jpg'),
+        panorama: require('../../assets/img/pigyin.jpg'),
         hotSpots: [
           {
             pitch: -10.6,
@@ -437,7 +436,7 @@ const showVr = () => {
         hfov: 30,
         yaw: 5,
         type: 'equirectangular',
-        panorama: require('../../assets/img//art.jpg'),
+        panorama: require('../../assets/img/art.jpg'),
         hotSpots: [
           {
             pitch: -0.6,
@@ -464,7 +463,7 @@ const showVr = () => {
         hfov: 30,
         yaw: 5,
         type: 'equirectangular',
-        panorama: require('../../assets/img//big.jpg'),
+        panorama: require('../../assets/img/big.jpg'),
         hotSpots: [
           {
             pitch: 10.6,
@@ -511,7 +510,7 @@ const hotspot = (hotSpotDiv: any, args: any) => {
   var img = document.createElement('img');
   span.innerHTML = args;
   hotSpotDiv.appendChild(span);
-  // hotSpotDiv.appendChild(img);
+  hotSpotDiv.appendChild(img);
   span.style.fontSize = 12 + 'px';
   span.style.color = '#fff';
   span.style.width = span.scrollWidth - 20 + 'px';
@@ -520,7 +519,7 @@ const hotspot = (hotSpotDiv: any, args: any) => {
   span.style.borderRadius = 6 + 'px';
   img.style.width = 40 + 'px';
   img.style.height = 40 + 'px';
-  img.src = 'http://www.italyvirtualtour.cn/icon/viewIcon.gif';
+  img.src = 'http://www.italyvirtualtour.cn/icon/diandian.gif';
   img.style.display = 'block';
   img.style.margin = 'auto';
 };

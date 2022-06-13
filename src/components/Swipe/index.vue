@@ -67,7 +67,7 @@ const changeView = (item: any, index: any) => {
   bottom: 2px;
   left: 50%;
   transform: translate(-50%,0);
-  font-size: 12px;
+  font-size: 10px;
   color: #fff;
   width: 120px;
   text-align: center;

@@ -120,7 +120,7 @@ const getValue = () => {
   box-sizing: border-box;
 }
 .iconWraapper {
-  color: #fff;
+  color: rgb(73, 38, 7);
   font-size: 16px;
   display: inline-block;
   align-items: center;
