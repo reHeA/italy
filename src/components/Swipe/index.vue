@@ -2,9 +2,9 @@
   <div class="swipe">
     <van-swipe :loop="false" :width="120" :height="84" :initial-swipe="0" :show-indicators="false" ref="swipe">
       <van-swipe-item v-for="(item, index) in viewData" :key="index" @click="changeView(item, index)">
-        <div class="imgBox" :style="{ border: index == fouceNum ? '2px solid #fff' : 'none' }">
+        <div class="imgBox" :style="{ border: index == fouceNum ? '3px solid rgb(254,143,1)' : '2px solid #fff' }">
           <img :src="item.scenic_cover" alt="" class="viewImg" />
-          <div class="name">{{item.scenic_name}}</div>
+          <div class="name">{{ item.scenic_name }}</div>
         </div>
       </van-swipe-item>
     </van-swipe>
@@ -30,7 +30,7 @@ const getData = async () => {
 const $emit = defineEmits(['getCover']);
 const changeView = (item: any, index: any) => {
   fouceNum.value = index;
-  swipe.value.swipeTo(index == 0 ? index : index - 1, '');
+  // swipe.value.swipeTo(index == 0 ? index : index - 1, '');
   $emit('getCover', item);
 };
 </script>
@@ -43,7 +43,7 @@ const changeView = (item: any, index: any) => {
   z-index: 1;
   padding: 8px;
   box-sizing: border-box;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.45);
   display: flex;
   flex-direction: row;
   overflow: auto;
@@ -62,15 +62,18 @@ const changeView = (item: any, index: any) => {
   width: 100%;
   height: 78px;
 }
-.name{
+.name {
   position: absolute;
-  bottom: 2px;
+  bottom: 0;
   left: 50%;
-  transform: translate(-50%,0);
+  transform: translate(-50%, 0);
   font-size: 10px;
   color: #fff;
   width: 120px;
+  height: 20px;
   text-align: center;
+  background: rgba(0, 0, 0, 0.7);
+  line-height: 20px;
 }
 >>> .van-swipe-item {
   margin-right: 24px;

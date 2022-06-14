@@ -74,19 +74,19 @@ const showVideo = () => {
 };
 const toView = (val: any) => {
   switch (val.toElement.innerHTML) {
-    case '花之圣母大教堂':
+    case '点击进入：花之圣母大教堂':
       MusicPlay.value.play();
       setTimeout(() => {
         MusicPlay.value.pause();
       }, 5000);
       break;
-    case '圣十字大教堂':
+    case '点击进入：圣十字大教堂':
       MusicPlay1.value.play();
       setTimeout(() => {
         MusicPlay1.value.pause();
       }, 5000);
       break;
-    case '新圣母玛丽亚教堂':
+    case '点击进入：新圣母玛丽亚教堂':
       MusicPlay2.value.play();
       setTimeout(() => {
         MusicPlay2.value.pause();
@@ -94,7 +94,7 @@ const toView = (val: any) => {
       break;
   }
   swipeData.value.map((item: any) => {
-    if (val.toElement.innerHTML == item.scenic_name) {
+    if (val.toElement.innerHTML.split('：')[1] == item.scenic_name) {
       isCity.value = true;
       imgList.value = item.scenic_back_imgs;
       breifTitle.value = item.scenic_name;
@@ -175,7 +175,7 @@ const showVr = () => {
             type: 'info',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot,
-            createTooltipArgs: '花之圣母大教堂'
+            createTooltipArgs: '点击进入：花之圣母大教堂'
           },
           {
             pitch: 0.4,
@@ -183,7 +183,7 @@ const showVr = () => {
             type: 'scene',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot1,
-            createTooltipArgs: '圣十字大教堂',
+            createTooltipArgs: '由此进入：圣十字大教堂',
             sceneId: 2
           }
         ]
@@ -201,7 +201,7 @@ const showVr = () => {
             type: 'info',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot,
-            createTooltipArgs: '圣十字大教堂'
+            createTooltipArgs: '点击进入：圣十字大教堂'
           },
           {
             pitch: -0.6,
@@ -209,7 +209,7 @@ const showVr = () => {
             type: 'scene',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot1,
-            createTooltipArgs: '领主广场',
+            createTooltipArgs: '由此进入：领主广场',
             sceneId: 3,
             targetYaw: -23,
             targetPitch: 2
@@ -228,7 +228,7 @@ const showVr = () => {
             type: 'info',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot,
-            createTooltipArgs: '领主广场'
+            createTooltipArgs: '点击进入：领主广场'
           },
           {
             pitch: 160,
@@ -244,7 +244,7 @@ const showVr = () => {
             type: 'scene',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot1,
-            createTooltipArgs: '比斯广场',
+            createTooltipArgs: '由此进入：比斯广场',
             sceneId: 4,
             targetYaw: -23,
             targetPitch: 2
@@ -263,7 +263,7 @@ const showVr = () => {
             type: 'info',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot,
-            createTooltipArgs: '佣兵凉廊'
+            createTooltipArgs: '点击进入：佣兵凉廊'
           },
           {
             pitch: -10,
@@ -271,7 +271,7 @@ const showVr = () => {
             type: 'scene',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot1,
-            createTooltipArgs: '佛罗伦萨老桥',
+            createTooltipArgs: '由此进入：佛罗伦萨老桥',
             sceneId: 5,
             targetYaw: -23,
             targetPitch: 2
@@ -290,7 +290,7 @@ const showVr = () => {
             type: 'info',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot,
-            createTooltipArgs: '佛罗伦萨老桥'
+            createTooltipArgs: '点击进入：佛罗伦萨老桥'
           },
           {
             pitch: -0.6,
@@ -298,7 +298,7 @@ const showVr = () => {
             type: 'scene',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot1,
-            createTooltipArgs: '切利尼雕像',
+            createTooltipArgs: '由此进入：切利尼雕像',
             sceneId: 6,
             targetYaw: -23,
             targetPitch: 2
@@ -317,7 +317,7 @@ const showVr = () => {
             type: 'info',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot,
-            createTooltipArgs: '切利尼雕像'
+            createTooltipArgs: '点击进入：切利尼雕像'
           },
           {
             pitch: -10.6,
@@ -325,7 +325,7 @@ const showVr = () => {
             type: 'scene',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot1,
-            createTooltipArgs: '米开朗基罗广场',
+            createTooltipArgs: '由此进入：米开朗基罗广场',
             sceneId: 7,
             targetYaw: -23,
             targetPitch: 2
@@ -344,7 +344,7 @@ const showVr = () => {
             type: 'info',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot,
-            createTooltipArgs: '大卫铜像'
+            createTooltipArgs: '点击进入：大卫铜像'
           },
           {
             pitch: -10.6,
@@ -352,7 +352,7 @@ const showVr = () => {
             type: 'scene',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot1,
-            createTooltipArgs: '佛罗伦萨城市全貌',
+            createTooltipArgs: '由此进入：佛罗伦萨城市全貌',
             sceneId: 8,
             targetYaw: -23,
             targetPitch: 2
@@ -379,7 +379,7 @@ const showVr = () => {
             type: 'scene',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot1,
-            createTooltipArgs: '波波里花园',
+            createTooltipArgs: '由此进入：波波里花园',
             sceneId: 9,
             targetYaw: -23,
             targetPitch: 2
@@ -398,7 +398,7 @@ const showVr = () => {
             type: 'info',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot,
-            createTooltipArgs: '波波里花园'
+            createTooltipArgs: '点击进入：波波里花园'
           },
           {
             pitch: 190.6,
@@ -406,7 +406,7 @@ const showVr = () => {
             type: 'scene',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot1,
-            createTooltipArgs: '皮蒂宫',
+            createTooltipArgs: '由此进入：皮蒂宫',
             sceneId: 10,
             targetYaw: -23,
             targetPitch: 2
@@ -425,7 +425,7 @@ const showVr = () => {
             type: 'scene',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot1,
-            createTooltipArgs: '乌菲兹美术馆',
+            createTooltipArgs: '由此进入：乌菲兹美术馆',
             sceneId: 11,
             targetYaw: -23,
             targetPitch: 2
@@ -444,7 +444,7 @@ const showVr = () => {
             type: 'info',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot,
-            createTooltipArgs: '乌菲兹美术馆'
+            createTooltipArgs: '点击进入：乌菲兹美术馆'
           },
           {
             pitch: -10.6,
@@ -452,7 +452,7 @@ const showVr = () => {
             type: 'scene',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot1,
-            createTooltipArgs: '新圣母大教堂',
+            createTooltipArgs: '由此进入：新圣母大教堂',
             sceneId: 12,
             targetYaw: -23,
             targetPitch: 2
@@ -471,7 +471,7 @@ const showVr = () => {
             type: 'info',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot,
-            createTooltipArgs: '新圣母大教堂'
+            createTooltipArgs: '由此进入：新圣母大教堂'
           }
         ]
       }
@@ -514,11 +514,11 @@ const hotspot = (hotSpotDiv: any, args: any) => {
   span.style.fontSize = 12 + 'px';
   span.style.color = '#fff';
   span.style.width = span.scrollWidth - 20 + 'px';
-  span.style.padding = 4 + 'px';
-  span.style.background = 'darkgray';
+  span.style.padding = 2 + 'px';
+  span.style.background = 'rgba(0, 0, 0, 0.7)';
   span.style.borderRadius = 6 + 'px';
-  img.style.width = 40 + 'px';
-  img.style.height = 40 + 'px';
+  img.style.width = 20 + 'px';
+  img.style.height = 20 + 'px';
   img.src = 'http://www.italyvirtualtour.cn/icon/diandian.gif';
   img.style.display = 'block';
   img.style.margin = 'auto';
@@ -533,11 +533,11 @@ const hotspot1 = (hotSpotDiv: any, args: any) => {
   span.style.fontSize = 12 + 'px';
   span.style.color = '#fff';
   span.style.width = span.scrollWidth - 20 + 'px';
-  span.style.padding = 4 + 'px';
-  span.style.background = 'darkgray';
+  span.style.padding = 2 + 'px';
+  span.style.background = 'rgba(0, 0, 0, 0.7)';
   span.style.borderRadius = 6 + 'px';
-  img.style.width = 40 + 'px';
-  img.style.height = 20 + 'px';
+  img.style.width = 20 + 'px';
+  img.style.height = 10 + 'px';
   img.src = 'http://www.italyvirtualtour.cn/icon/upIcon.gif';
   img.style.display = 'block';
   img.style.margin = 'auto';

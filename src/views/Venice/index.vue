@@ -75,19 +75,19 @@ const showVideo = () => {
 };
 const toView = (val: any) => {
   switch (val.toElement.innerHTML) {
-    case '花之圣母大教堂':
+    case '点击进入：花之圣母大教堂':
       MusicPlay.value.play();
       setTimeout(() => {
         MusicPlay.value.pause();
       }, 5000);
       break;
-    case '圣十字大教堂':
+    case '点击进入：圣十字大教堂':
       MusicPlay1.value.play();
       setTimeout(() => {
         MusicPlay1.value.pause();
       }, 5000);
       break;
-    case '新圣母玛丽亚教堂':
+    case '点击进入：新圣母玛丽亚教堂':
       MusicPlay2.value.play();
       setTimeout(() => {
         MusicPlay2.value.pause();
@@ -163,7 +163,7 @@ const showVr = () => {
             type: 'info',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot,
-            createTooltipArgs: '圣方济会荣耀圣母教堂'
+            createTooltipArgs: '点击进入：圣方济会荣耀圣母教堂'
           },
           {
             pitch: 0,
@@ -190,7 +190,7 @@ const showVr = () => {
             type: 'info',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot,
-            createTooltipArgs: '圣马可教堂'
+            createTooltipArgs: '点击进入：圣马可教堂'
           },
           {
             pitch: 0.1,
@@ -217,7 +217,7 @@ const showVr = () => {
             type: 'info',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot,
-            createTooltipArgs: '圣马可教堂顶'
+            createTooltipArgs: '点击进入：圣马可教堂顶'
           },
           {
             pitch: 190.6,
@@ -244,7 +244,7 @@ const showVr = () => {
             type: 'info',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot,
-            createTooltipArgs: '叹息桥'
+            createTooltipArgs: '点击进入：叹息桥'
           },
 
           {
@@ -298,11 +298,11 @@ const hotspot = (hotSpotDiv: any, args: any) => {
   span.style.fontSize = 12 + 'px';
   span.style.color = '#fff';
   span.style.width = span.scrollWidth - 20 + 'px';
-  span.style.padding = 4 + 'px';
-  span.style.background = 'darkgray';
+  span.style.padding = 2 + 'px';
+  span.style.background = 'rgba(0, 0, 0, 0.7)';
   span.style.borderRadius = 6 + 'px';
-  img.style.width = 40 + 'px';
-  img.style.height = 40 + 'px';
+  img.style.width = 20 + 'px';
+  img.style.height = 20 + 'px';
   img.src = 'http://www.italyvirtualtour.cn/icon/diandian.gif';
   img.style.display = 'block';
   img.style.margin = 'auto';
@@ -317,11 +317,11 @@ const hotspot1 = (hotSpotDiv: any, args: any) => {
   span.style.fontSize = 12 + 'px';
   span.style.color = '#fff';
   span.style.width = span.scrollWidth - 20 + 'px';
-  span.style.padding = 4 + 'px';
-  span.style.background = 'darkgray';
+  span.style.padding = 2 + 'px';
+  span.style.background = 'rgba(0, 0, 0, 0.7)';
   span.style.borderRadius = 6 + 'px';
-  img.style.width = 40 + 'px';
-  img.style.height = 20 + 'px';
+  img.style.width = 20 + 'px';
+  img.style.height = 10 + 'px';
   img.src = 'http://www.italyvirtualtour.cn/icon/upIcon.gif';
   img.style.display = 'block';
   img.style.margin = 'auto';

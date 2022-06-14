@@ -5,13 +5,14 @@
       :images="images"
       @change="onChange"
       @Close="close"
-      :showIndex="true"
-      loop
-      :swipeDuratio="3"
+      :loop="true"
+      closeable
+      :swipeDuration="300"
     >
+      <template #index></template>
       <template #cover>
         <div class="brief" v-show="isShow">
-          <img :src="imgSrc" alt="" class="viewImg">
+          <img :src="imgSrc" alt="" class="viewImg" />
         </div>
         <div class="nav">
           <div>
@@ -57,9 +58,8 @@ interface p {
   giveId: any;
   briefContent?: string;
   breifTitle?: string;
-  
 }
-const imgSrc = ref<string>()
+const imgSrc = ref<string>();
 const $emit = defineEmits(['closeView', 'getData']);
 const props = withDefaults(defineProps<p>(), {
   viewShow: false,
@@ -95,7 +95,7 @@ watch(
     images.value = props.imgList;
     upNum.value = props.upVal;
     giveParams.give_id = props.giveId;
-    imgSrc.value = props.briefContent.split('"')[1]
+    imgSrc.value = props.briefContent.split('"')[1];
   }
 );
 const images = ref<any[]>([]);
@@ -175,10 +175,10 @@ const close = () => {
   line-height: 20px;
   height: 440px;
 }
-.viewImg{
+.viewImg {
   width: 100%;
-  height: 100%;
-  background-size: 100% 100%;
+  /* height: 100%; */
+  /* background-size: 100% 100%; */
 }
 /* .content {
   font-size: 12px;
