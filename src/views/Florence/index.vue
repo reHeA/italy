@@ -21,9 +21,9 @@
     "
     :src="src"
   />
-  <audio :src="require('../../assets/shengmu.wav')" ref="MusicPlay" hidden></audio>
+  <!-- <audio :src="require('../../assets/shengmu.wav')" ref="MusicPlay" hidden></audio>
   <audio :src="require('../../assets/shengshizi.wav')" ref="MusicPlay1" hidden></audio>
-  <audio :src="require('../../assets/xinshengmu.mp3')" ref="MusicPlay2" hidden></audio>
+  <audio :src="require('../../assets/xinshengmu.mp3')" ref="MusicPlay2" hidden></audio> -->
 </template>
 <script lang="ts" setup>
 import { getCity, getScenic } from '@/api/user';
@@ -73,26 +73,6 @@ const showVideo = () => {
   videoShow.value = true;
 };
 const toView = (val: any) => {
-  switch (val.toElement.innerHTML) {
-    case '点击进入：花之圣母大教堂':
-      MusicPlay.value.play();
-      setTimeout(() => {
-        MusicPlay.value.pause();
-      }, 5000);
-      break;
-    case '点击进入：圣十字大教堂':
-      MusicPlay1.value.play();
-      setTimeout(() => {
-        MusicPlay1.value.pause();
-      }, 5000);
-      break;
-    case '点击进入：新圣母玛丽亚教堂':
-      MusicPlay2.value.play();
-      setTimeout(() => {
-        MusicPlay2.value.pause();
-      }, 5000);
-      break;
-  }
   swipeData.value.map((item: any) => {
     if (val.toElement.innerHTML.split('：')[1] == item.scenic_name) {
       isCity.value = true;
@@ -332,34 +312,34 @@ const showVr = () => {
           }
         ]
       },
+      //       7: {
+      //   hfov: 30,
+      //   yaw: 5,
+      //   type: 'equirectangular',
+      //   panorama: require('../../assets/img/mikailangqiluo.jpg'),
+      //   hotSpots: [
+      //     {
+      //       pitch: -0.6,
+      //       yaw: -5.1,
+      //       type: 'info',
+      //       cssClass: 'custom-hotspot',
+      //       createTooltipFunc: hotspot,
+      //       createTooltipArgs: '点击进入：大卫铜像'
+      //     },
+      //     {
+      //       pitch: -10.6,
+      //       yaw: 87.1,
+      //       type: 'scene',
+      //       cssClass: 'custom-hotspot',
+      //       createTooltipFunc: hotspot1,
+      //       createTooltipArgs: '由此进入：佛罗伦萨城市全貌',
+      //       sceneId: 8,
+      //       targetYaw: -23,
+      //       targetPitch: 2
+      //     }
+      //   ]
+      // },
       7: {
-        hfov: 30,
-        yaw: 5,
-        type: 'equirectangular',
-        panorama: require('../../assets/img/mikailangqiluo.jpg'),
-        hotSpots: [
-          {
-            pitch: -0.6,
-            yaw: -5.1,
-            type: 'info',
-            cssClass: 'custom-hotspot',
-            createTooltipFunc: hotspot,
-            createTooltipArgs: '点击进入：大卫铜像'
-          },
-          {
-            pitch: -10.6,
-            yaw: 87.1,
-            type: 'scene',
-            cssClass: 'custom-hotspot',
-            createTooltipFunc: hotspot1,
-            createTooltipArgs: '由此进入：佛罗伦萨城市全貌',
-            sceneId: 8,
-            targetYaw: -23,
-            targetPitch: 2
-          }
-        ]
-      },
-      8: {
         hfov: 20,
         yaw: 5,
         type: 'equirectangular',
@@ -380,13 +360,13 @@ const showVr = () => {
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot1,
             createTooltipArgs: '由此进入：波波里花园',
-            sceneId: 9,
+            sceneId: 8,
             targetYaw: -23,
             targetPitch: 2
           }
         ]
       },
-      9: {
+      8: {
         hfov: 30,
         yaw: 5,
         type: 'equirectangular',
@@ -407,13 +387,13 @@ const showVr = () => {
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot1,
             createTooltipArgs: '由此进入：皮蒂宫',
-            sceneId: 10,
+            sceneId: 9,
             targetYaw: -23,
             targetPitch: 2
           }
         ]
       },
-      10: {
+      9: {
         hfov: 30,
         yaw: 5,
         type: 'equirectangular',
@@ -426,13 +406,13 @@ const showVr = () => {
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot1,
             createTooltipArgs: '由此进入：乌菲兹美术馆',
-            sceneId: 11,
+            sceneId: 10,
             targetYaw: -23,
             targetPitch: 2
           }
         ]
       },
-      11: {
+      10: {
         hfov: 30,
         yaw: 5,
         type: 'equirectangular',
@@ -453,13 +433,13 @@ const showVr = () => {
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot1,
             createTooltipArgs: '由此进入：新圣母大教堂',
-            sceneId: 12,
+            sceneId: 11,
             targetYaw: -23,
             targetPitch: 2
           }
         ]
       },
-      12: {
+      11: {
         hfov: 30,
         yaw: 5,
         type: 'equirectangular',
@@ -476,6 +456,150 @@ const showVr = () => {
         ]
       }
     }
+    //   7: {
+    //     hfov: 30,
+    //     yaw: 5,
+    //     type: 'equirectangular',
+    //     panorama: require('../../assets/img/mikailangqiluo.jpg'),
+    //     hotSpots: [
+    //       {
+    //         pitch: -0.6,
+    //         yaw: -5.1,
+    //         type: 'info',
+    //         cssClass: 'custom-hotspot',
+    //         createTooltipFunc: hotspot,
+    //         createTooltipArgs: '点击进入：大卫铜像'
+    //       },
+    //       {
+    //         pitch: -10.6,
+    //         yaw: 87.1,
+    //         type: 'scene',
+    //         cssClass: 'custom-hotspot',
+    //         createTooltipFunc: hotspot1,
+    //         createTooltipArgs: '由此进入：佛罗伦萨城市全貌',
+    //         sceneId: 8,
+    //         targetYaw: -23,
+    //         targetPitch: 2
+    //       }
+    //     ]
+    //   },
+    //   8: {
+    //     hfov: 20,
+    //     yaw: 5,
+    //     type: 'equirectangular',
+    //     panorama: require('../../assets/img/city.jpg'),
+    //     hotSpots: [
+    //       //           {
+    //       //   pitch: 190.6,
+    //       //   yaw: 50.1,
+    //       //   type: 'info',
+    //       //   cssClass: 'custom-hotspot',
+    //       //   createTooltipFunc: hotspot,
+    //       //   createTooltipArgs: '波波里花园'
+    //       // },
+    //       {
+    //         pitch: 190.6,
+    //         yaw: 50.1,
+    //         type: 'scene',
+    //         cssClass: 'custom-hotspot',
+    //         createTooltipFunc: hotspot1,
+    //         createTooltipArgs: '由此进入：波波里花园',
+    //         sceneId: 9,
+    //         targetYaw: -23,
+    //         targetPitch: 2
+    //       }
+    //     ]
+    //   },
+    //   9: {
+    //     hfov: 30,
+    //     yaw: 5,
+    //     type: 'equirectangular',
+    //     panorama: require('../../assets/img/boboli.jpg'),
+    //     hotSpots: [
+    //       {
+    //         pitch: -10.6,
+    //         yaw: 2,
+    //         type: 'info',
+    //         cssClass: 'custom-hotspot',
+    //         createTooltipFunc: hotspot,
+    //         createTooltipArgs: '点击进入：波波里花园'
+    //       },
+    //       {
+    //         pitch: 190.6,
+    //         yaw: 70.1,
+    //         type: 'scene',
+    //         cssClass: 'custom-hotspot',
+    //         createTooltipFunc: hotspot1,
+    //         createTooltipArgs: '由此进入：皮蒂宫',
+    //         sceneId: 10,
+    //         targetYaw: -23,
+    //         targetPitch: 2
+    //       }
+    //     ]
+    //   },
+    //   10: {
+    //     hfov: 30,
+    //     yaw: 5,
+    //     type: 'equirectangular',
+    //     panorama: require('../../assets/img/pigyin.jpg'),
+    //     hotSpots: [
+    //       {
+    //         pitch: -10.6,
+    //         yaw: 8.1,
+    //         type: 'scene',
+    //         cssClass: 'custom-hotspot',
+    //         createTooltipFunc: hotspot1,
+    //         createTooltipArgs: '由此进入：乌菲兹美术馆',
+    //         sceneId: 11,
+    //         targetYaw: -23,
+    //         targetPitch: 2
+    //       }
+    //     ]
+    //   },
+    //   11: {
+    //     hfov: 30,
+    //     yaw: 5,
+    //     type: 'equirectangular',
+    //     panorama: require('../../assets/img/art.jpg'),
+    //     hotSpots: [
+    //       {
+    //         pitch: -0.6,
+    //         yaw: 37.1,
+    //         type: 'info',
+    //         cssClass: 'custom-hotspot',
+    //         createTooltipFunc: hotspot,
+    //         createTooltipArgs: '点击进入：乌菲兹美术馆'
+    //       },
+    //       {
+    //         pitch: -10.6,
+    //         yaw: 8.1,
+    //         type: 'scene',
+    //         cssClass: 'custom-hotspot',
+    //         createTooltipFunc: hotspot1,
+    //         createTooltipArgs: '由此进入：新圣母大教堂',
+    //         sceneId: 12,
+    //         targetYaw: -23,
+    //         targetPitch: 2
+    //       }
+    //     ]
+    //   },
+    //   12: {
+    //     hfov: 30,
+    //     yaw: 5,
+    //     type: 'equirectangular',
+    //     panorama: require('../../assets/img/big.jpg'),
+    //     hotSpots: [
+    //       {
+    //         pitch: 10.6,
+    //         yaw: 0.1,
+    //         type: 'info',
+    //         cssClass: 'custom-hotspot',
+    //         createTooltipFunc: hotspot,
+    //         createTooltipArgs: '由此进入：新圣母大教堂'
+    //       }
+    //     ]
+    //   }
+    // }
     // type: 'equirectangular',
     // panorama: imageCover.value,
     // autoLoad: true,

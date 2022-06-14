@@ -120,13 +120,8 @@ const close = () => {
   background-color: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(6px);
 }
-.bgcc {
-  width: 100%;
-  height: 100%;
-  background-image: url('../../assets/flolunsaBgc.jpg');
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  position: relative;
+>>>.van-image-preview__image--vertical{
+  height: unset;
 }
 .nav {
   width: 100%;
@@ -158,7 +153,9 @@ const close = () => {
   background-color: #fff;
   top: 50%;
   transform: translate(0, -50%);
+  overflow: auto;
 }
+
 .header {
   text-align: center;
   font-size: 0.37333rem;

@@ -1,7 +1,7 @@
 <template>
-  <van-overlay :show="VideoShow" @click="$emit('close')">
+  <van-overlay :show="VideoShow" @click="vedioClose">
     <div class="video">
-      <vue3VideoPlay v-bind="options" />
+      <vue3VideoPlay v-bind="options" ref="vedio" />
     </div>
   </van-overlay>
 </template>
@@ -17,14 +17,16 @@ const player = ref<any>();
 const videoRef = ref<any>();
 const show = ref<boolean>(false);
 const VideoShow = ref<boolean>(false);
+const vedio = ref<any>();
 interface p {
   show: boolean;
-  src:string
+  src: string;
 }
 const props = withDefaults(defineProps<p>(), {
   show: false,
-  src:''
+  src: ''
 });
+const $emit = defineEmits(['close']);
 const options = reactive({
   width: '100%', //播放器高度
   height: '260px', //播放器高度
@@ -48,6 +50,10 @@ watch(
     options.src = newVal;
   }
 );
+const vedioClose = () => {
+  vedio.value.ended
+  $emit('close');
+};
 </script>
 
 <style scoped>

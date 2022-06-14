@@ -21,9 +21,9 @@
     "
     :src="src"
   />
-  <audio :src="require('../../assets/shengmu.wav')" ref="MusicPlay" hidden></audio>
+  <!-- <audio :src="require('../../assets/shengmu.wav')" ref="MusicPlay" hidden></audio>
   <audio :src="require('../../assets/shengshizi.wav')" ref="MusicPlay1" hidden></audio>
-  <audio :src="require('../../assets/xinshengmu.mp3')" ref="MusicPlay2" hidden></audio>
+  <audio :src="require('../../assets/xinshengmu.mp3')" ref="MusicPlay2" hidden></audio> -->
 </template>
 <script lang="ts" setup>
 import { getCity, getScenic } from '@/api/user';
@@ -35,7 +35,6 @@ import { onBeforeMount, onMounted, reactive, ref, watch } from 'vue';
 const MusicPlay = ref<any>();
 const MusicPlay1 = ref<any>();
 const MusicPlay2 = ref<any>();
-
 const breifTitle = ref<string>('');
 const briefContent = ref<string>('');
 const imageCover = ref<any>();
@@ -74,28 +73,8 @@ const showVideo = () => {
   videoShow.value = true;
 };
 const toView = (val: any) => {
-  switch (val.toElement.innerHTML) {
-    case '点击进入：花之圣母大教堂':
-      MusicPlay.value.play();
-      setTimeout(() => {
-        MusicPlay.value.pause();
-      }, 5000);
-      break;
-    case '点击进入：圣十字大教堂':
-      MusicPlay1.value.play();
-      setTimeout(() => {
-        MusicPlay1.value.pause();
-      }, 5000);
-      break;
-    case '点击进入：新圣母玛丽亚教堂':
-      MusicPlay2.value.play();
-      setTimeout(() => {
-        MusicPlay2.value.pause();
-      }, 5000);
-      break;
-  }
   swipeData.value.map((item: any) => {
-    if (val.toElement.innerHTML == item.scenic_name) {
+    if (val.toElement.innerHTML.split('：')[1] == item.scenic_name) {
       isCity.value = true;
       imgList.value = item.scenic_back_imgs;
       breifTitle.value = item.scenic_name;
