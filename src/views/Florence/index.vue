@@ -73,8 +73,12 @@ const showVideo = () => {
   videoShow.value = true;
 };
 const toView = (val: any) => {
+  let name = '';
+  if (val.toElement.innerHTML.split('：')[1] == '佣兵凉廊') {
+    name = '比斯广场';
+  }
   swipeData.value.map((item: any) => {
-    if (val.toElement.innerHTML.split('：')[1] == item.scenic_name) {
+    if (val.toElement.innerHTML.split('：')[1] == item.scenic_name || name == item.scenic_name) {
       isCity.value = true;
       imgList.value = item.scenic_back_imgs;
       breifTitle.value = item.scenic_name;
@@ -135,7 +139,7 @@ const showVr = () => {
   panor.value = pannellum.viewer('panorama', {
     default: {
       firstScene: ScenceView.value,
-      // author: 'Matthew Petroff',
+      // firstScene: 4,
       sceneFadeDuration: 1000,
       autoLoad: true,
       autoRotate: -2
@@ -143,9 +147,9 @@ const showVr = () => {
     scenes: {
       1: {
         // title: 'Mason Circle',
-        hfov: 30,
-        pitch: -3,
-        yaw: 117,
+        hfov: 80,
+        pitch: 10.1,
+        yaw: 1.5,
         type: 'equirectangular',
         panorama: require('../../assets/img/shenmu.jpg'),
         hotSpots: [
@@ -170,8 +174,9 @@ const showVr = () => {
       },
 
       2: {
-        hfov: 30,
-        yaw: 5,
+        hfov: 80,
+        pitch: 10.1,
+        yaw: 1.5,
         type: 'equirectangular',
         panorama: require('../../assets/img/shizi.jpg'),
         hotSpots: [
@@ -197,8 +202,9 @@ const showVr = () => {
         ]
       },
       3: {
-        hfov: 30,
-        yaw: 5,
+        hfov: 80,
+        pitch: 12,
+        yaw: 130,
         type: 'equirectangular',
         panorama: require('../../assets/img/lingzhu.jpg'),
         hotSpots: [
@@ -210,14 +216,14 @@ const showVr = () => {
             createTooltipFunc: hotspot,
             createTooltipArgs: '点击进入：领主广场'
           },
-          {
-            pitch: 160,
-            yaw: -20,
-            type: 'info',
-            cssClass: 'custom-hotspot',
-            createTooltipFunc: hotspot,
-            createTooltipArgs: '佛罗伦萨露天博物馆'
-          },
+          // {
+          //   pitch: 160,
+          //   yaw: -20,
+          //   type: 'info',
+          //   cssClass: 'custom-hotspot',
+          //   createTooltipFunc: hotspot,
+          //   createTooltipArgs: '佛罗伦萨露天博物馆'
+          // },
           {
             pitch: 190,
             yaw: 37.1,
@@ -232,8 +238,9 @@ const showVr = () => {
         ]
       },
       4: {
-        hfov: 30,
-        yaw: 5,
+        hfov: 80,
+        pitch: 12,
+        yaw: 200,
         type: 'equirectangular',
         panorama: require('../../assets/img/bisi.jpg'),
         hotSpots: [
@@ -259,8 +266,9 @@ const showVr = () => {
         ]
       },
       5: {
-        hfov: 30,
-        yaw: 5,
+        hfov: 80,
+        pitch: 12.6,
+        yaw: 182.1,
         type: 'equirectangular',
         panorama: require('../../assets/img/laoqiao.jpg'),
         hotSpots: [
@@ -286,8 +294,9 @@ const showVr = () => {
         ]
       },
       6: {
-        hfov: 30,
-        yaw: 5,
+        hfov: 80,
+        pitch: -0.6,
+        yaw: 4.1,
         type: 'equirectangular',
         panorama: require('../../assets/img/qielini.jpg'),
         hotSpots: [
@@ -313,7 +322,7 @@ const showVr = () => {
         ]
       },
       //       7: {
-      //   hfov: 30,
+      //  hfov: 80,
       //   yaw: 5,
       //   type: 'equirectangular',
       //   panorama: require('../../assets/img/mikailangqiluo.jpg'),
@@ -340,8 +349,9 @@ const showVr = () => {
       //   ]
       // },
       7: {
-        hfov: 20,
-        yaw: 5,
+        hfov: 80,
+        pitch: 12.6,
+        yaw: 220.1,
         type: 'equirectangular',
         panorama: require('../../assets/img/city.jpg'),
         hotSpots: [
@@ -367,8 +377,9 @@ const showVr = () => {
         ]
       },
       8: {
-        hfov: 30,
-        yaw: 5,
+        hfov: 80,
+        pitch: -10.6,
+        yaw: 2,
         type: 'equirectangular',
         panorama: require('../../assets/img/boboli.jpg'),
         hotSpots: [
@@ -394,11 +405,20 @@ const showVr = () => {
         ]
       },
       9: {
-        hfov: 30,
-        yaw: 5,
+        hfov: 80,
+        pitch: -10.6,
+        yaw: 8.1,
         type: 'equirectangular',
         panorama: require('../../assets/img/pigyin.jpg'),
         hotSpots: [
+          {
+            pitch: 10.6,
+            yaw: 8.1,
+            type: 'info',
+            cssClass: 'custom-hotspot',
+            createTooltipFunc: hotspot,
+            createTooltipArgs: '点击进入：皮蒂宫'
+          },
           {
             pitch: -10.6,
             yaw: 8.1,
@@ -413,8 +433,9 @@ const showVr = () => {
         ]
       },
       10: {
-        hfov: 30,
-        yaw: 5,
+        hfov: 80,
+        pitch: -0.6,
+        yaw: 37.1,
         type: 'equirectangular',
         panorama: require('../../assets/img/art.jpg'),
         hotSpots: [
@@ -440,8 +461,9 @@ const showVr = () => {
         ]
       },
       11: {
-        hfov: 30,
-        yaw: 5,
+        hfov: 80,
+        pitch: 10.6,
+        yaw: 0.1,
         type: 'equirectangular',
         panorama: require('../../assets/img/big.jpg'),
         hotSpots: [
@@ -451,13 +473,13 @@ const showVr = () => {
             type: 'info',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot,
-            createTooltipArgs: '由此进入：新圣母大教堂'
+            createTooltipArgs: '由此进入：新圣母玛利亚教堂'
           }
         ]
       }
     }
     //   7: {
-    //     hfov: 30,
+    //    hfov: 80,
     //     yaw: 5,
     //     type: 'equirectangular',
     //     panorama: require('../../assets/img/mikailangqiluo.jpg'),
@@ -484,7 +506,7 @@ const showVr = () => {
     //     ]
     //   },
     //   8: {
-    //     hfov: 20,
+    //    hfov: 80,
     //     yaw: 5,
     //     type: 'equirectangular',
     //     panorama: require('../../assets/img/city.jpg'),
@@ -511,7 +533,7 @@ const showVr = () => {
     //     ]
     //   },
     //   9: {
-    //     hfov: 30,
+    //    hfov: 80,
     //     yaw: 5,
     //     type: 'equirectangular',
     //     panorama: require('../../assets/img/boboli.jpg'),
@@ -538,7 +560,7 @@ const showVr = () => {
     //     ]
     //   },
     //   10: {
-    //     hfov: 30,
+    //    hfov: 80,
     //     yaw: 5,
     //     type: 'equirectangular',
     //     panorama: require('../../assets/img/pigyin.jpg'),
@@ -557,7 +579,7 @@ const showVr = () => {
     //     ]
     //   },
     //   11: {
-    //     hfov: 30,
+    //    hfov: 80,
     //     yaw: 5,
     //     type: 'equirectangular',
     //     panorama: require('../../assets/img/art.jpg'),
@@ -584,7 +606,7 @@ const showVr = () => {
     //     ]
     //   },
     //   12: {
-    //     hfov: 30,
+    //    hfov: 80,
     //     yaw: 5,
     //     type: 'equirectangular',
     //     panorama: require('../../assets/img/big.jpg'),

@@ -26,10 +26,10 @@
             </div>
           </div>
           <div>
-            <div class="iconWraapper" @click="getDetail">
+            <!-- <div class="iconWraapper" @click="getDetail">
               <i class="iconfont icon-jianjie" />
               <div class="iconTitle">简介</div>
-            </div>
+            </div> -->
             <div class="iconWraapper" @click="getUp">
               <i class="iconfont icon-dianzan" />
               <div class="iconTitle">{{ upNum }}</div>
@@ -116,6 +116,9 @@ const close = () => {
 </script>
 
 <style scoped>
+>>>.van-image-preview__swipe-item{
+  overflow: auto;
+}
 >>> .van-image-preview {
   background-color: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(6px);

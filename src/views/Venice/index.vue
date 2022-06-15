@@ -70,8 +70,14 @@ const showVideo = () => {
   videoShow.value = true;
 };
 const toView = (val: any) => {
+  console.log(val.toElement.innerHTML.split('：'));
+  
+  let name = '';
+  if (val.toElement.innerHTML.split('：')[1] == '圣马可广场') {
+    name = '圣马可教堂顶';
+  }
   swipeData.value.map((item: any) => {
-    if (val.toElement.innerHTML.split('：')[1] == item.scenic_name) {
+    if (val.toElement.innerHTML.split('：')[1] == item.scenic_name || name == item.scenic_name) {
       isCity.value = true;
       imgList.value = item.scenic_back_imgs;
       breifTitle.value = item.scenic_name;
@@ -128,8 +134,9 @@ const showVr = () => {
     },
     scenes: {
       12: {
-        hfov: 30,
-        yaw: 5,
+        hfov: 80,
+        pitch: 10.1,
+        yaw: 100,
         type: 'equirectangular',
         panorama: require('../../assets/venvie/shengfang.jpg'),
         hotSpots: [
@@ -147,7 +154,7 @@ const showVr = () => {
             type: 'scene',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot1,
-            createTooltipArgs: '圣马可教堂',
+            createTooltipArgs: '由此进入：圣马可教堂',
             sceneId: 13,
             targetYaw: -23,
             targetPitch: 5
@@ -155,8 +162,8 @@ const showVr = () => {
         ]
       },
       13: {
-        hfov: 30,
-        yaw: 5,
+        hfov: 80,
+        yaw: -20,
         type: 'equirectangular',
         panorama: require('../../assets/venvie/shengmake.jpg'),
         hotSpots: [
@@ -174,7 +181,7 @@ const showVr = () => {
             type: 'scene',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot1,
-            createTooltipArgs: '圣马可教堂顶',
+            createTooltipArgs: '由此进入：圣马可教堂顶',
             sceneId: 14,
             targetYaw: -23,
             targetPitch: 14
@@ -182,7 +189,7 @@ const showVr = () => {
         ]
       },
       14: {
-        hfov: 30,
+        hfov: 80,
         yaw: 5,
         type: 'equirectangular',
         panorama: require('../../assets/venvie/shengguang.jpg'),
@@ -193,7 +200,7 @@ const showVr = () => {
             type: 'info',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot,
-            createTooltipArgs: '点击进入：圣马可教堂顶'
+            createTooltipArgs: '点击进入：圣马可广场'
           },
           {
             pitch: 190.6,
@@ -201,7 +208,7 @@ const showVr = () => {
             type: 'scene',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot1,
-            createTooltipArgs: '叹息桥',
+            createTooltipArgs: '由此进入：叹息桥',
             sceneId: 15,
             targetYaw: -23,
             targetPitch: 14
@@ -229,7 +236,7 @@ const showVr = () => {
             type: 'scene',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot1,
-            createTooltipArgs: '总督府',
+            createTooltipArgs: '由此进入：总督府',
             sceneId: 16,
             targetYaw: -23,
             targetPitch: 12
@@ -248,7 +255,7 @@ const showVr = () => {
             type: 'info',
             cssClass: 'custom-hotspot',
             createTooltipFunc: hotspot,
-            createTooltipArgs: '总督府'
+            createTooltipArgs: '点击进入：总督府'
           }
           // {
           //   pitch: 0.4,
