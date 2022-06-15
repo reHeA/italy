@@ -21,9 +21,6 @@
     "
     :src="src"
   />
-  <!-- <audio :src="require('../../assets/shengmu.wav')" ref="MusicPlay" hidden></audio>
-  <audio :src="require('../../assets/shengshizi.wav')" ref="MusicPlay1" hidden></audio>
-  <audio :src="require('../../assets/xinshengmu.mp3')" ref="MusicPlay2" hidden></audio> -->
 </template>
 <script lang="ts" setup>
 import { getCity, getScenic } from '@/api/user';

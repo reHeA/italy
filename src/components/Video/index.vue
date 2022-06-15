@@ -9,7 +9,7 @@
 <script lang="ts" setup>
 import videojs from 'video.js';
 import { getCountry } from '@/api/user';
-import { onMounted, ref, watch, reactive } from 'vue';
+import { onMounted, ref, watch, reactive, onBeforeUnmount, onUnmounted } from 'vue';
 import 'vue3-video-play/dist/style.css';
 import vue3VideoPlay from 'vue3-video-play';
 import { createLogger } from 'vuex';
@@ -42,6 +42,7 @@ watch(
   () => props.show,
   (newVal, oldVal) => {
     VideoShow.value = newVal;
+    console.log(options.currentTime);
   }
 );
 watch(
@@ -50,8 +51,12 @@ watch(
     options.src = newVal;
   }
 );
+onUnmounted(() => {
+  const vedio = document.getElementById('vedio');
+  vedio?.remove();
+});
 const vedioClose = () => {
-  vedio.value.ended
+  vedio.value.pause();
   $emit('close');
 };
 </script>
