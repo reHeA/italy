@@ -3,7 +3,8 @@ import { onMounted, reactive, ref } from 'vue';
 import Video from '@/components/Video/index.vue';
 import View from './View.vue';
 import { getCountry, Give, getInsert } from '@/api/user';
-
+import { useRoute, useRouter } from 'vue-router';
+const router = useRouter();
 const dialogShow = ref<boolean>(false);
 const upNum = ref<number>(0);
 const hasUp = ref<boolean>(false);
@@ -56,6 +57,9 @@ const getValue = () => {
     }
   });
 };
+const toChat = () => {
+  router.push('/chat');
+};
 </script>
 
 <template>
@@ -65,7 +69,7 @@ const getValue = () => {
         <i class="iconfont icon-vedio" />
         <div class="iconTitle">VR宣传片</div>
       </div>
-      <div class="iconWraapper" @click="getJie">
+      <div class="iconWraapper" @click="toChat">
         <i class="iconfont icon-home" />
         <div class="iconTitle">意起过节</div>
       </div>

@@ -25,6 +25,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'palermo',
     component: () => import('@/views/Palermo/index.vue')
   },
+  {
+    path: '/chat',
+    name: 'chat',
+    component: () => import('@/components/Chat/index.vue')
+  },
 ];
 
 const router = createRouter({
