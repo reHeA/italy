@@ -10,12 +10,21 @@ interface give {
   type: number,
   give_id: number
 }
-interface brow{
+interface brow {
   type: number,
   browse_id: number
 }
-interface scenic{
-  city_id:number
+interface scenic {
+  city_id: number
+}
+interface imgList {
+  file: any[]
+}
+interface tochat {
+  travel_images: any[],
+  travel_name: string,
+  travel_sex: number,
+  travel_content: string
 }
 export const Give = (data: give) => {
   return request({
@@ -30,17 +39,37 @@ export const getCity = () => {
     method: 'get'
   });
 };
-export const getScenic = (data:scenic) => {
+export const getScenic = (data: scenic) => {
   return request({
     url: '/get-scenic',
     method: 'post',
     data
   });
 };
-export const getInsert = (data:brow) => {
+export const getInsert = (data: brow) => {
   return request({
     url: '/insert-browse',
     method: 'post',
     data
+  });
+}
+export const Uploader = (data: imgList) => {
+  return request({
+    url: '/insert-uploads',
+    method: 'post',
+    data
+  });
+}
+export const toChat = (data: tochat) => {
+  return request({
+    url: '/insert-travel',
+    method: 'post',
+    data
+  });
+}
+export const queryList = () => {
+  return request({
+    url: '/select-travel',
+    method: 'get',
   });
 }

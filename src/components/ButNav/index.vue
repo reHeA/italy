@@ -69,10 +69,10 @@ const toChat = () => {
         <i class="iconfont icon-vedio" />
         <div class="iconTitle">VR宣传片</div>
       </div>
-      <div class="iconWraapper" @click="toChat">
+      <!-- <div class="iconWraapper" @click="toChat">
         <i class="iconfont icon-home" />
         <div class="iconTitle">意起过节</div>
-      </div>
+      </div> -->
     </div>
     <div>
       <div class="iconWraapper" @click="getDetail">

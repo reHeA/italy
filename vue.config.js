@@ -15,17 +15,17 @@ module.exports = {
       warnings: false,
       errors: true
     },
-    // proxy: {
-    //   "": {
-    //     target: `http://aip.italyvirtualtour.cn/`,
-    //     changeOrigin: true,
-    //   },
+    proxy: {
+      "": {
+        target: `http://api.italyvirtualtour.cn/`,
+        changeOrigin: true,
+      },
 
     //   // "/js": {
     //   //   target: `http://www.italyvirtualtour.cn/`,
     //   //   changeOrigin: true,
     //   // },
-    // }
+    }
   },
   configureWebpack: config => {
     // 生产环境配置

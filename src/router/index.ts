@@ -30,6 +30,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'chat',
     component: () => import('@/components/Chat/index.vue')
   },
+  {
+    path: '/chatAdd',
+    name: 'chatAdd',
+    component: () => import('@/components/Chat/chatAdd.vue')
+  },
 ];
 
 const router = createRouter({
