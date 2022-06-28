@@ -47,7 +47,7 @@ const isCity = ref<boolean>(false);
 const ScenicParams = reactive({
   city_id: 1
 });
-const ScenceView = ref<any>(12);
+const ScenceView = ref<any>(17);
 const cityIndex = ref<any>(0);
 const upVal = ref<number>();
 const getShow = () => {
@@ -71,10 +71,16 @@ const showVideo = () => {
 };
 const toView = (val: any) => {
   console.log(val.toElement.innerHTML.split('：'));
-  
+
   let name = '';
   if (val.toElement.innerHTML.split('：')[1] == '圣马可广场') {
     name = '圣马可教堂顶';
+  }
+  if (val.toElement.innerHTML.split('：')[1] == '威尼斯大运河') {
+    name = '大运河岸';
+  }
+  if (val.toElement.innerHTML.split('：')[1] == '赛船节') {
+    window.location.href = 'https://mp.weixin.qq.com/s/WFbpfYsHgf8IuJJNQ3oLuQ';
   }
   swipeData.value.map((item: any) => {
     if (val.toElement.innerHTML.split('：')[1] == item.scenic_name || name == item.scenic_name) {
@@ -127,12 +133,105 @@ const removeDom = () => {
 const showVr = () => {
   panor.value = pannellum.viewer('panorama', {
     default: {
+      // firstScene: 19,
       firstScene: ScenceView.value,
       sceneFadeDuration: 1000,
       autoLoad: true,
       autoRotate: -2
     },
     scenes: {
+      17: {
+        hfov: 80,
+        pitch: 10.1,
+        yaw: -80,
+        type: 'equirectangular',
+        panorama: require('../../assets/venvie/liyatuoqiao.jpg'),
+        hotSpots: [
+          {
+            pitch: 170,
+            yaw: 90,
+            type: 'info',
+            cssClass: 'custom-hotspot',
+            createTooltipFunc: hotspot,
+            createTooltipArgs: '点击进入：里亚托桥'
+          },
+          {
+            pitch: 0,
+            yaw: 95,
+            type: 'scene',
+            cssClass: 'custom-hotspot',
+            createTooltipFunc: hotspot1,
+            createTooltipArgs: '由此进入：大运河岸',
+            sceneId: 18,
+            targetYaw: -23,
+            targetPitch: 5
+          }
+        ]
+      },
+      18: {
+        hfov: 80,
+        pitch: 10.1,
+        yaw: 10,
+        type: 'equirectangular',
+        panorama: require('../../assets/venvie/dayunhean.jpg'),
+        hotSpots: [
+          {
+            pitch: 0,
+            yaw: -20,
+            type: 'info',
+            cssClass: 'custom-hotspot',
+            createTooltipFunc: hotspot,
+            createTooltipArgs: '点击进入：威尼斯大运河'
+          },
+          {
+            pitch: 0,
+            yaw: 10,
+            type: 'info',
+            cssClass: 'custom-hotspot',
+            createTooltipFunc: hotspot,
+            createTooltipArgs: '点击进入：赛船节'
+          },
+          {
+            pitch: 0,
+            yaw: 65,
+            type: 'scene',
+            cssClass: 'custom-hotspot',
+            createTooltipFunc: hotspot1,
+            createTooltipArgs: '由此进入：威尼斯学院桥',
+            sceneId: 19,
+            targetYaw: -23,
+            targetPitch: 5
+          }
+        ]
+      },
+      19: {
+        hfov: 80,
+        pitch: 10.1,
+        yaw: -190,
+        type: 'equirectangular',
+        panorama: require('../../assets/venvie/shuiqiao.jpg'),
+        hotSpots: [
+          {
+            pitch: -20,
+            yaw: -180,
+            type: 'info',
+            cssClass: 'custom-hotspot',
+            createTooltipFunc: hotspot,
+            createTooltipArgs: '点击进入：威尼斯学院桥'
+          },
+          {
+             pitch: 0,
+            yaw: -80,
+            type: 'scene',
+            cssClass: 'custom-hotspot',
+            createTooltipFunc: hotspot1,
+            createTooltipArgs: '由此进入：圣方济会荣耀圣母教堂',
+            sceneId: 12,
+            targetYaw: -23,
+            targetPitch: 5
+          }
+        ]
+      },
       12: {
         hfov: 80,
         pitch: 10.1,

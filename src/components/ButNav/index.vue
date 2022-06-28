@@ -4,6 +4,7 @@ import Video from '@/components/Video/index.vue';
 import View from './View.vue';
 import { getCountry, Give, getInsert } from '@/api/user';
 import { useRoute, useRouter } from 'vue-router';
+import { Toast } from 'vant';
 const router = useRouter();
 const dialogShow = ref<boolean>(false);
 const upNum = ref<number>(0);
@@ -58,7 +59,11 @@ const getValue = () => {
   });
 };
 const toChat = () => {
-  router.push('/chat');
+  // router.push('/chat');
+  Toast({
+  message: '敬请期待',
+  position: 'middle',
+});
 };
 </script>
 
@@ -69,10 +74,10 @@ const toChat = () => {
         <i class="iconfont icon-vedio" />
         <div class="iconTitle">VR宣传片</div>
       </div>
-      <!-- <div class="iconWraapper" @click="toChat">
+      <div class="iconWraapper" @click="toChat">
         <i class="iconfont icon-home" />
-        <div class="iconTitle">意起过节</div>
-      </div> -->
+        <div class="iconTitle">意起游</div>
+      </div>
     </div>
     <div>
       <div class="iconWraapper" @click="getDetail">

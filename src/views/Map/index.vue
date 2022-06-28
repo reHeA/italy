@@ -11,6 +11,9 @@ const toWei = () => {
 const toFo = () => {
   router.push('/florence');
 };
+const toBa = ()=>{
+  router.push('/palermo')
+}
 onMounted(() => {
   // nextTick(() => {
   //   initMap();
@@ -444,24 +447,24 @@ onMounted(() => {
   height: 100px;
 }
 .ba {
-  background-size: 50% 50%;
-  width: 23%;
-  position: absolute;
-  top: 70%;
-  left: 52%;
+background-size: 50% 50%;
+    width: 27%;
+    position: absolute;
+    top: 69%;
+    left: 52%;
 }
 .fo {
   background-size: 50% 50%;
-  width: 20%;
+  width: 18%;
   position: absolute;
-  top: 28%;
+  top: 29%;
   left: 28%;
 }
 .wei {
-  background-size: 50% 50%;
-  width: 20%;
-  position: absolute;
-  top: 15%;
-  left: 39%;
+background-size: 50% 50%;
+    width: 24%;
+    position: absolute;
+    top: 15%;
+    left: 34%;
 }
 </style>
